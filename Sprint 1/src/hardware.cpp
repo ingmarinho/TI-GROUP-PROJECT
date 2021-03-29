@@ -22,25 +22,25 @@ void setup()
 
     // pinMode(4, OUTPUT);     // GPIO 23 | Physical 16 | Output knop
     // pinMode(5, INPUT);      // GPIO 24 | Physical 8  | Input knop
-    pinMode(SERV, OUTPUT); // GPIO 25 | Physical 22 | Output servo (SERVO)
+    pinMode(SERV, OUTPUT);  // GPIO 25 | Physical 22 | Output servo (SERVO)
     pinMode(TRIG, OUTPUT);  // GPIO 8  | Physical 24 | Output distance sensor (TRIG)
     pinMode(ECHO, INPUT);   // GPIO 7  | Physical 26 | Input distance sensor (ECHO)
 }
 
-void pulse(const int pin, const float delay1, const int wait_time)
+void pulse(const int pin, const unsigned int delay1, const int wait_time)
 {
     digitalWrite(pin, HIGH);
-    delay(delay1);
+    usleep(delay1);
     digitalWrite(pin, LOW);
-    delay(wait_time);
+    usleep(wait_time);
 }
 
-int changeServoPosition(const float position)
+int changeServoPosition(const int position)
 {
     int wait_time = 20;
     float step_size = 0.02f;
     float base_time = 0.5f;
-    float servo_pulse_time = base_time + (position * step_size);
+    unsigned int servo_pulse_time = base_time + (position * step_size);
 
     cout << servo_pulse_time << endl;
     
