@@ -1,24 +1,12 @@
 #include "hardware.h"
 
-
-int testServo()
+int testServo(const int position)
 {
-    float wait_time = 0.02;
-    float step_size = 0.002 / 100.0;
-    float base_time = 0.0005;
-    float servo_pulse_time;
-    for (int i = 0; i < 101; i++)
-    {
-        servo_pulse_time = base_time + i * step_size;
-        pulse(6, servo_pulse_time, wait_time);
-    }
+    float wachttijd = 200;
 
-    for (int i = 100; i < 0; i--)
-    {
-        servo_pulse_time = base_time + i * step_size;
-        pulse(6, servo_pulse_time, wait_time);
-    }
-    pulse(SERV, servo_pulse_time, wait_time);
+    float positie = round(((10000 * wachttijd) + 400) / 1000000, 7000);
+
+    pulse(positie, wachttijd - positie);
 
     return 0;
 }
@@ -33,14 +21,13 @@ void testHardware()
         delay(500);
         x++;
     }
-    
-    testServo(10);
-}
 
+    testServo(10);
+    testServo(90);
+}
 
 int main()
 {
     setup();
     testHardware();
-
 }
