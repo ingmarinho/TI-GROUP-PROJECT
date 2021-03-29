@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <unistd.h>
 #include <wiringPi.h>
 
 #define SERV 6      // GPIO 25 | Physical 22 | Output servo (SERVO)
