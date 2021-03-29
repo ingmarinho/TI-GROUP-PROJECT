@@ -1,4 +1,4 @@
-#include <hardware.h>
+#include <hardware.hpp>
 
 
 void testHardware()
