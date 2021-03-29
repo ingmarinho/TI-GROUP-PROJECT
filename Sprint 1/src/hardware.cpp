@@ -40,7 +40,7 @@ int changeServoPosition(const int position)
     int wait_time = 20;
     float step_size = 0.02f;
     float base_time = 0.5f;
-    unsigned int servo_pulse_time = (base_time + (position * step_size));
+    unsigned int servo_pulse_time = (base_time + (position * step_size)) * 1000;
 
     cout << servo_pulse_time << endl;
     
