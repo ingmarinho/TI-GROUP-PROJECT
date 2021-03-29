@@ -4,7 +4,7 @@ int testServo(const int position)
 {
     float wachttijd = 200;
 
-    float positie = round(((10000 * wachttijd) + 400) / 1000000, 7000);
+    float positie = round(((10 * wachttijd) + 0.4) / 1000, 7);
 
     pulse(positie, wachttijd - positie);
 
