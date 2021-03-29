@@ -49,6 +49,12 @@ vector<bool> binearmaker(int num, vector<bool> &end)
 void ledcall(int pos, string color)
 {
     ledarray[pos] = translate(color);
+    digitalWrite(infopin,LOW);
+    for (int i = 0; i < 32; i++)
+    {
+        digitalWrite(clockpin,HIGH);
+        digitalWrite(clockpin,LOW);
+    }
     for (int i = 0; i < ledarray.size(); i++)
     {
         vector<bool> led = {1,1,1,0,0,0,1,0};
