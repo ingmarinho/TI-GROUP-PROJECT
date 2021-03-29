@@ -35,12 +35,14 @@ void pulse(const int pin, const float delay1, const int wait_time)
     delay(wait_time);
 }
 
-int changeServoPosition(const int position)
+int changeServoPosition(const float position)
 {
     int wait_time = 20;
-    float step_size = 0.025;
-    // float base_time = 0.5f;
-    float servo_pulse_time = position * step_size;
+    float step_size = 0.02f;
+    float base_time = 0.5f;
+    float servo_pulse_time = base_time + (position * step_size);
+
+    cout << servo_pulse_time << endl;
     
     pulse(SERV, servo_pulse_time, wait_time);
 
