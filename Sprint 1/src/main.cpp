@@ -1,4 +1,4 @@
-#include <hardware.hpp>
+#include <hardware.h>
 
 
 void testHardware()
@@ -21,6 +21,7 @@ void testHardware()
 
 int main()
 {
+    setup();
     testHardware();
     
 

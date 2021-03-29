@@ -1,4 +1,4 @@
-#include <hardware.hpp>
+#include <hardware.h>
 
 // void knop()
 // {
@@ -15,6 +15,17 @@
 //         delay(100);
 //     }
 // }
+
+void setup()
+{
+    wiringPiSetup();
+
+    // pinMode(4, OUTPUT);     // GPIO 23 | Physical 16 | Output knop
+    // pinMode(5, INPUT);      // GPIO 24 | Physical 8  | Input knop
+    pinMode(SERVO, OUTPUT); // GPIO 25 | Physical 22 | Output servo (SERVO)
+    pinMode(TRIG, OUTPUT);  // GPIO 8  | Physical 24 | Output afstandsensor (TRIG)
+    pinMode(ECHO, INPUT);   // GPIO 7  | Physical 26 | Input afstandsensor (ECHO)
+}
 
 void pulse(const int pin, const float delay1, const float delay2)
 {
