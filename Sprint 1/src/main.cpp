@@ -5,6 +5,8 @@
 #define TRIG 10
 #define ECHO 11
 
+using namespace std;
+
 void pulse(const int pin, const float delay1, const float delay2)
 {
     digitalWrite(pin, HIGH);
@@ -61,7 +63,7 @@ int sr04()
 int main()
 {
     wiringPiSetup();
-    
+
     pinMode(4, OUTPUT);     // GPIO 23 | Physical 16 | Output knop
     pinMode(5, INPUT);      // GPIO 24 | Physical 8  | Input knop
     pinMode(SERVO, OUTPUT); // GPIO 25 | Physical 22 | Output servo (SERVO)
