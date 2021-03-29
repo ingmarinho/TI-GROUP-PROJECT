@@ -5,15 +5,6 @@
 #define TRIG 10
 #define ECHO 11
 
-void setup()
-{
-    pinMode(4, OUTPUT);     // GPIO 23 | Physical 16 | Output knop
-    pinMode(5, INPUT);      // GPIO 24 | Physical 8  | Input knop
-    pinMode(SERVO, OUTPUT); // GPIO 25 | Physical 22 | Output servo (SERVO)
-    pinMode(TRIG, OUTPUT);  // GPIO 8  | Physical 24 | Output afstandsensor (TRIG)
-    pinMode(ECHO, INPUT);   // GPIO 7  | Physical 26 | Input afstandsensor (ECHO)
-}
-
 void pulse(const int pin, const float delay1, const float delay2)
 {
     digitalWrite(pin, HIGH);
@@ -70,7 +61,11 @@ int sr04()
 int main()
 {
     wiringPiSetup();
-    setup();
-
+    
+    pinMode(4, OUTPUT);     // GPIO 23 | Physical 16 | Output knop
+    pinMode(5, INPUT);      // GPIO 24 | Physical 8  | Input knop
+    pinMode(SERVO, OUTPUT); // GPIO 25 | Physical 22 | Output servo (SERVO)
+    pinMode(TRIG, OUTPUT);  // GPIO 8  | Physical 24 | Output afstandsensor (TRIG)
+    pinMode(ECHO, INPUT);   // GPIO 7  | Physical 26 | Input afstandsensor (ECHO)
 
 }
