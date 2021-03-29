@@ -11,5 +11,5 @@ using namespace std;
 
 void setup();
 void pulse(const int pin, const float delay1, const float delay2);
-int servo(const int position);
-int distanceSensor();
+int changeServoPosition(const int position);
+int getCurrentDistance();
