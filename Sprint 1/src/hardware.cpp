@@ -22,27 +22,26 @@ void setup()
 
     // pinMode(4, OUTPUT);     // GPIO 23 | Physical 16 | Output knop
     // pinMode(5, INPUT);      // GPIO 24 | Physical 8  | Input knop
-    // pinMode(SERV, OUTPUT); // GPIO 25 | Physical 22 | Output servo (SERVO)
-    softServoSetup(SERV);
+    pinMode(SERV, OUTPUT); // GPIO 25 | Physical 22 | Output servo (SERVO)
     pinMode(TRIG, OUTPUT);  // GPIO 8  | Physical 24 | Output distance sensor (TRIG)
     pinMode(ECHO, INPUT);   // GPIO 7  | Physical 26 | Input distance sensor (ECHO)
 }
 
-void pulse(const int pin, const float delay1, const float delay2)
+void pulse(const int pin, const float delay1, const int wait_time)
 {
     digitalWrite(pin, HIGH);
-    delay(delay1 * 1000);
+    delay(delay1);
     digitalWrite(pin, LOW);
-    delay(delay2 * 1000);
+    delay(wait_time);
 }
 
 int changeServoPosition(const int position)
 {
-    float wait_time = 0.02;
-    float step_size = 0.002 / 100.0;
-    float base_time = 0.0005;
-    float servo_pulse_time = base_time + position * step_size;
-
+    int wait_time = 20;
+    float step_size = 0.025;
+    // float base_time = 0.5f;
+    float servo_pulse_time = position * step_size;
+    
     pulse(SERV, servo_pulse_time, wait_time);
 
     return 0;
@@ -55,9 +54,9 @@ int getCurrentDistance()
     digitalWrite(TRIG, LOW);
 
     while (digitalRead(ECHO) == LOW);
-
     long int startTime = micros();
     while (digitalRead(ECHO) == HIGH);
+
     long int travelTime = micros() - startTime;
 
     int distance = travelTime / 58;

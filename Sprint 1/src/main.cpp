@@ -11,8 +11,8 @@ void testHardware()
     //     x++;
     // }
 
-    // changeServoPosition(1);
-    softServoWrite(SERV, 500)
+    changeServoPosition(1);
+
 }
 
 
