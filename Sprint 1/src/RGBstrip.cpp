@@ -36,7 +36,7 @@ vector<int> translate(string input)
         return vector<int>{0, 0, 0};
 }
 
-vector<bool> binearmaker(int num, vector<bool> &end)
+void binearmaker(int num, vector<bool> &end)
 {
     int i = 128;
     while (i > 0)
@@ -46,7 +46,6 @@ vector<bool> binearmaker(int num, vector<bool> &end)
             num -= i;
         i = i >> 1;
     }
-    return end;
 }
 
 void ledcall(int pos, string color)
