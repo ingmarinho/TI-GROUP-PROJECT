@@ -4,8 +4,8 @@
 #include <wiringPi.h>
 
 #define SERV 6      // GPIO 25 | Physical 22 | Output servo (SERVO)
-#define TRIG 10     // GPIO 8  | Physical 24 | Output afstandsensor (TRIG)
-#define ECHO 11     // GPIO 7  | Physical 26 | Input afstandsensor (ECHO)
+#define TRIG 10     // GPIO 8  | Physical 24 | Output distance sensor (TRIG)
+#define ECHO 11     // GPIO 7  | Physical 26 | Input distance sensor (ECHO)
 
 using namespace std;
 
