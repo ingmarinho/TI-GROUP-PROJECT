@@ -20,11 +20,13 @@ void setup()
 {
     wiringPiSetup();
 
-    // pinMode(4, OUTPUT);     // GPIO 23 | Physical 16 | Output knop
-    // pinMode(5, INPUT);      // GPIO 24 | Physical 8  | Input knop
-    pinMode(SERV, OUTPUT);  // GPIO 25 | Physical 22 | Output servo (SERVO)
-    pinMode(TRIG, OUTPUT);  // GPIO 8  | Physical 24 | Output distance sensor (TRIG)
-    pinMode(ECHO, INPUT);   // GPIO 7  | Physical 26 | Input distance sensor (ECHO)
+    // pinMode(4, OUTPUT);      // GPIO 23 | Physical 16 | Output knop
+    // pinMode(5, INPUT);       // GPIO 24 | Physical 8  | Input knop
+    pinMode(CLCK, OUTPUT);      // GPIO 1  | Physical 28 | Output led strip (CLCK)
+    pinMode(INFO, OUTPUT);      // GPIO 12 | Physical 32 | Output led strip (INFO)
+    pinMode(SERV, OUTPUT);      // GPIO 25 | Physical 22 | Output servo (SERVO)
+    pinMode(TRIG, OUTPUT);      // GPIO 8  | Physical 24 | Output distance sensor (TRIG)
+    pinMode(ECHO, INPUT);       // GPIO 7  | Physical 26 | Input distance sensor (ECHO)
 }
 
 void pulse(const int &pin, const unsigned int &delay1, const unsigned int &wait_time)

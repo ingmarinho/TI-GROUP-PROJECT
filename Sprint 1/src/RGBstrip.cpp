@@ -18,21 +18,21 @@ vector<int> translate(string input)
 {
     if (input == "red")
         return vector<int>{0, 0, 255};
-    if (input == "orange")
+    else if (input == "orange")
         return vector<int>{0, 50, 255};
-    if (input == "yellow")
+    else if (input == "yellow")
         return vector<int>{0, 100, 255};
-    if (input == "green")
+    else if (input == "green")
         return vector<int>{0, 255, 0};
-    if (input == "lblue")
+    else if (input == "lblue")
         return vector<int>{255, 255, 0};
-    if (input == "blue")
+    else if (input == "blue")
         return vector<int>{255, 0, 0};
-    if (input == "purple")
+    else if (input == "purple")
         return vector<int>{255, 0, 255};
-    if (input == "white")
+    else if (input == "white")
         return vector<int>{255, 255, 255};
-    if (input == "black")
+    else // black
         return vector<int>{0, 0, 0};
 }
 
