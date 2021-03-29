@@ -27,7 +27,7 @@ void setup()
     pinMode(ECHO, INPUT);   // GPIO 7  | Physical 26 | Input distance sensor (ECHO)
 }
 
-void pulse(const int pin, const unsigned int delay1, const unsigned int wait_time)
+void pulse(const int &pin, const unsigned int &delay1, const unsigned int &wait_time)
 {
     digitalWrite(pin, HIGH);
     usleep(delay1);
@@ -39,10 +39,8 @@ int changeServoPosition(const int position)
 {
     int wait_time = 20;
     float step_size = 0.02f;
-    float base_time = 0.5f;
+    float base_time = 0.4f;
     unsigned int servo_pulse_time = (base_time + (position * step_size)) * 1000;
-
-    cout << servo_pulse_time << endl;
     
     pulse(SERV, servo_pulse_time, wait_time);
 
