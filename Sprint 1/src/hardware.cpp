@@ -30,9 +30,9 @@ void setup()
 void pulse(const int pin, const float delay1, const float delay2)
 {
     digitalWrite(pin, HIGH);
-    delay(delay1 * 100);
+    delay(delay1 * 1000);
     digitalWrite(pin, LOW);
-    delay(delay2 * 100);
+    delay(delay2 * 1000);
 }
 
 int servo(const int position)

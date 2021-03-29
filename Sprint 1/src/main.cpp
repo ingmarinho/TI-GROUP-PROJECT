@@ -2,7 +2,7 @@
 
 int testServo(const int position)
 {
-    float wachttijd = 200;
+    float wachttijd = 0.02;
 
     float positie = round(((10 * wachttijd) + 0.4) / 1000, 7);
 
@@ -24,6 +24,8 @@ void testHardware()
 
     testServo(10);
     testServo(90);
+    // servo(10);
+    // servo(90);
 }
 
 int main()
