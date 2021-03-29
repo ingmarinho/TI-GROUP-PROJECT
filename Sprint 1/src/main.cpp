@@ -10,6 +10,7 @@ void testHardware()
         cout << "Distance in cm: " << distance << endl;
         delay(500);
         x++;
+        cout << x << endl;
     }
 
     if (servo(40) != 0)
