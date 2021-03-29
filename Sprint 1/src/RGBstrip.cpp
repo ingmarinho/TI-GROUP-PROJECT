@@ -7,10 +7,12 @@ using namespace std;
 int clockpin = 10;
 int infopin = 11;
 
-
-pinMode(clockpin, OUTPUT);
-pinMode(infopin, OUTPUT);
-
+void setup()
+{
+    wiringPiSetup();
+    pinMode(clockpin, OUTPUT);
+    pinMode(infopin, OUTPUT);
+}
 
 vector<vector<int>> ledarray = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
@@ -77,6 +79,7 @@ void ledcall(int pos, string color)
 
 int main()
 {
+    setup();
     ledcall(0, "yellow");
     ledcall(3, "white");
     ledcall(7, "green");

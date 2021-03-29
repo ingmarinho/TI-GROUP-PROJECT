@@ -37,12 +37,12 @@ void pulse(const int &pin, const unsigned int &delay1, const unsigned int &wait_
     usleep(wait_time);
 }
 
-int changeServoPosition(const int position)
+int changeServoPosition(const int position) // 0 - 100
 {
     int wait_time = 20;
     float step_size = 0.02f;
     float base_time = 0.4f;
-    unsigned int servo_pulse_time = (base_time + (position * step_size)) * 1000;
+    unsigned int servo_pulse_time = (base_time + (position * step_size)) * 1000; // conversion to microseconds (usleep is in microseconds)
     
     pulse(SERV, servo_pulse_time, wait_time);
 
