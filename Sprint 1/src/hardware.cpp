@@ -47,7 +47,7 @@ int servo(const int position)
     return 0;
 }
 
-int afstandSensor()
+int distanceSensor()
 {
     digitalWrite(TRIG, HIGH);
     delayMicroseconds(20);
