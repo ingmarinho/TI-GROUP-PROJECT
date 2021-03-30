@@ -2,8 +2,6 @@
 
 int openBridge();
 int closeBridge();
-int openRightBarrier();
-int closeRightBarrier();
-int openLeftBarrier();
-int closeLeftBarrier();
+int closeBarriers()
+int openBarriers()
 void checkBoatDetection();
