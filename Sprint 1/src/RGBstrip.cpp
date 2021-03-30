@@ -5,8 +5,8 @@
 
 using namespace std;
 
-int clockpin = 31;
-int infopin = 26;
+int clockpin = 10;
+int infopin = 6;
 
 void setup()
 {
