@@ -84,7 +84,7 @@ void stoplight(string state)
 {
     while (cstate != state)
     {
-        if (cstate == "red") { cstate = "yellow"; }
+        if (cstate == "green") { cstate = "yellow"; }
         else { cstate = state; }
         ledcall(7,cstate);
         ledcall(1,cstate);
@@ -95,7 +95,7 @@ void stoplight(string state)
         ledcall(6,cstate);
         ledcall(0,cstate);
         if (cstate != state);
-            usleep(10000);
+            usleep(1000000);
     }
 }
 
@@ -112,9 +112,9 @@ int main()
     ledcall(0,cstate);
     while (true)
     {
-        usleep(10000);
+        usleep(10000000);
         stoplight("red");
-        usleep(10000);
+        usleep(10000000);
         stoplight("green");
     }
 }
