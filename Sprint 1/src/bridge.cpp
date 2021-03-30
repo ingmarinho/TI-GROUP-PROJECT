@@ -12,7 +12,7 @@ PI_THREAD(closeRightBarrier)
 }
 int closeLeftBarrier()
 {
-    for (unsigned int i = 100; i > 50; i -= 2)
+    for (unsigned int i = 50; i < 100; i += 2)
     {
         changeServoPosition(SERV3, i);
         delay(200);
@@ -30,7 +30,7 @@ PI_THREAD(openRightBarrier)
 }
 int openLeftBarrier()
 {
-    for (unsigned int i = 50; i < 100; i += 2)
+    for (unsigned int i = 100; i > 50; i -= 2)
     {
         changeServoPosition(SERV3, i);
         delay(200);
