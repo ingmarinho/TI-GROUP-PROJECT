@@ -22,6 +22,6 @@ using namespace std;
 
 void setup();
 void pulse(const int pin, const float delay1, const float delay2);
-int changeServoPosition(const int position);
+int changeServoPositionBridge(const int position)
 int getCurrentDistanceFront();
 int getCurrentDistanceBack();

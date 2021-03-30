@@ -5,7 +5,7 @@ int openBridge()
 {
     for (unsigned int i = 0; i < 50; i += 2)
     {
-        changeServoPosition(i);
+        changeServoPositionBridge(i);
         delay(200);
     }
     return 0;
@@ -15,7 +15,27 @@ int closeBridge()
 {
     for (unsigned int i = 50; i > 0; i -= 2)
     {
-        changeServoPosition(i);
+        changeServoPositionBridge(i);
+        delay(200);
+    }
+    return 0;
+}
+
+int openBarriers()
+{
+    for (unsigned int i = 0; i < 50; i += 2)
+    {
+        changeServoPositionBarriers(i);
+        delay(200);
+    }
+    return 0;
+}
+
+int closeBarriers()
+{
+    for (unsigned int i = 0; i < 50; i += 2)
+    {
+        changeServoPositionBarriers(i);
         delay(200);
     }
     return 0;
@@ -28,6 +48,10 @@ void checkBoatDetection()
 
     if (distanceFront < 10 || distanceBack < 10)
     {
+
+        if (closeBarriers() == 0)
+            cout << "Barriers are closing!" << endl;
+
         if (openBridge() == 0)
             cout << "Bridge has been opened!" << endl;
 
@@ -41,6 +65,9 @@ void checkBoatDetection()
 
         if (closeBridge() == 0)
             cout << "Bridge has been closed!" << endl;
+
+        if (openBarriers() == 0)
+            cout << "Barriers are opening!" << endl;
     }
 
 }

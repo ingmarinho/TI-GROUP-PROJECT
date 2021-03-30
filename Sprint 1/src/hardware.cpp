@@ -43,7 +43,7 @@ void pulse(const int &pin, const unsigned int &delay1, const unsigned int &wait_
     usleep(wait_time);
 }
 
-int changeServoPosition(const int position) // 0 to 100 (0 to 180°)
+int changeServoPositionBridge(const int position) // 0 to 100 (0 to 180°)
 {
     int wait_time = 20;
     float step_size = 0.02f;
@@ -51,6 +51,19 @@ int changeServoPosition(const int position) // 0 to 100 (0 to 180°)
     unsigned int servo_pulse_time = (base_time + (position * step_size)) * 1000; // conversion to microseconds (usleep is in microseconds)
     
     pulse(SERV1, servo_pulse_time, wait_time);
+
+    return 0;
+}
+
+int changeServoPositionBarriers(const int position) // 0 to 100 (0 to 180°)
+{
+    int wait_time = 20;
+    float step_size = 0.02f;
+    float base_time = 0.4f;
+    unsigned int servo_pulse_time = (base_time + (position * step_size)) * 1000; // conversion to microseconds (usleep is in microseconds)
+    
+    pulse(SERV2, servo_pulse_time, wait_time);
+    pulse(SERV3, servo_pulse_time, wait_time);
 
     return 0;
 }
