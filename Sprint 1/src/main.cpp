@@ -14,13 +14,13 @@ void testHardware()
 
     for (unsigned int i = 0; i < 50; i += 2)
     {
-        changeServoPosition(i);
+        changeServoPositionBridge(i);
         delay(200);
     }
 
     for (unsigned int j = 50; j > 0; j -= 2)
     {
-        changeServoPosition(j);
+        changeServoPositionBridge(j);
         delay(200);
     }
 }
