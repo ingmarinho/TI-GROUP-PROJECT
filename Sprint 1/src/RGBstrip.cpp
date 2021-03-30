@@ -1,7 +1,7 @@
 #include <iostream>
 #include <wiringPi.h>
 #include <vector>
-#include <time.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -101,6 +101,15 @@ void stoplight(string state)
 int main()
 {
     setup();
+    ledcall(0,cstate);
+    ledcall(1,cstate);
+    ledcall(2,cstate);
+    ledcall(3,cstate);
+    ledcall(4,cstate);
+    ledcall(5,cstate);
+    ledcall(6,cstate);
+    ledcall(7,cstate);
+    usleep(1000);
     stoplight("red");
     usleep(1000);
     stoplight("green");
