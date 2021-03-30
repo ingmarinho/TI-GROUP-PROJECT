@@ -61,26 +61,19 @@ int closeBridge()
 int closeBarriers()
 {
     int rightBarrier = piThreadCreate(closeRightBarrier);
-    if (rightBarrier != 0)
-        cout << "Right barrier could not be opened!" << endl;
-
     int leftBarrier = piThreadCreate(closeLeftBarrier);
-    if (leftBarrier != 0)
-        cout << "Left barrier could not be opened!" << endl;
-
-    return 0;
+    if (leftBarrier == 0 && rightBarrier == 0)
+        return 0;
+    return 1;
 }
 
 int openBarriers()
 {
     int rightBarrier = piThreadCreate(openRightBarrier);
-    if (rightBarrier != 0)
-        cout << "Right barrier could not be closed!" << endl;
-
     int leftBarrier = piThreadCreate(openLeftBarrier);
-    if (leftBarrier != 0)
-        cout << "Left barrier could not be closed!" << endl;    
-    return 0;
+    if (leftBarrier == 0 && rightBarrier == 0)
+        return 0;
+    return 1;
 }
 
 void checkBoatDetection()
