@@ -12,7 +12,7 @@ void testHardware()
     }
 
 
-    for (unsigned int i = 0; i < 100; i += 2)
+    for (unsigned int i = 0; i < 50; i += 2)
     {
         changeServoPosition(i);
         delay(200);
