@@ -62,6 +62,9 @@ int closeBarriers()
 {
     int rightBarrier = piThreadCreate(closeRightBarrier);
     int leftBarrier = piThreadCreate(closeLeftBarrier);
+
+    delay(3000);
+
     if (leftBarrier == 0 && rightBarrier == 0)
         return 0;
     return 1;
@@ -71,6 +74,9 @@ int openBarriers()
 {
     int rightBarrier = piThreadCreate(openRightBarrier);
     int leftBarrier = piThreadCreate(openLeftBarrier);
+
+    delay(3000);
+
     if (leftBarrier == 0 && rightBarrier == 0)
         return 0;
     return 1;
