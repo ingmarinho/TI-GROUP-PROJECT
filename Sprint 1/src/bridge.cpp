@@ -24,7 +24,7 @@ int closeBridge()
 int closeBarriers()
 {
     int rightBarrier = piThreadCreate(closeRightBarrier);
-    if (leftBarrier != 0)
+    if (rightBarrier != 0)
         cout << "Right barrier could not be opened!" << endl;
 
     int leftBarrier = piThreadCreate(closeLeftBarrier);
@@ -37,7 +37,7 @@ int closeBarriers()
 int openBarriers()
 {
     int rightBarrier = piThreadCreate(openRightBarrier);
-    if (leftBarrier != 0)
+    if (rightBarrier != 0)
         cout << "Right barrier could not be closed!" << endl;
 
     int leftBarrier = piThreadCreate(openLeftBarrier);
@@ -77,7 +77,7 @@ PI_THREAD(openLeftBarrier)
 {
     for (unsigned int i = 50; i < 100; i += 2)
     {
-        changeServoPositionBarriers(SERV3, i);
+        changeServoPosition(SERV3, i);
         delay(200);
     }
     return 0;

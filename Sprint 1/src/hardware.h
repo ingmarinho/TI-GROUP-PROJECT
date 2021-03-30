@@ -23,4 +23,4 @@ using namespace std;
 void setup();
 void pulse(const int pin, const float delay1, const float delay2);
 int changeServoPosition(const int pin, const int position);
-int getCurrentDistance(const int trig_pin, const int echo_pin)
+int getCurrentDistance(const int trig_pin, const int echo_pin);

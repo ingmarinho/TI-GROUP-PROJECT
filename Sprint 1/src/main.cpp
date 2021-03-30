@@ -1,29 +1,29 @@
 #include "hardware.h"
 #include "bridge.h"
 
-void testHardware()
-{
-    int x = 0;
-    while (x < 20)
-    {
-        int distance = getCurrentDistanceFront();
-        cout << "Distance in cm: " << distance << endl;
-        delay(500);
-        x++;
-    }
+// void testHardware()
+// {
+//     int x = 0;
+//     while (x < 20)
+//     {
+//         int distance = getCurrentDistanceFront();
+//         cout << "Distance in cm: " << distance << endl;
+//         delay(500);
+//         x++;
+//     }
 
-    for (unsigned int i = 0; i < 50; i += 2)
-    {
-        changeServoPositionBridge(i);
-        delay(200);
-    }
+//     for (unsigned int i = 0; i < 50; i += 2)
+//     {
+//         changeServoPositionBridge(i);
+//         delay(200);
+//     }
 
-    for (unsigned int j = 50; j > 0; j -= 2)
-    {
-        changeServoPositionBridge(j);
-        delay(200);
-    }
-}
+//     for (unsigned int j = 50; j > 0; j -= 2)
+//     {
+//         changeServoPositionBridge(j);
+//         delay(200);
+//     }
+// }
 
 int main()
 {
