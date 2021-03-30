@@ -36,7 +36,7 @@ int openBridge()
 
 int closeBridge()
 {
-    for (unsigned int j = 50; j > 0; j -= 2)
+    for (unsigned int i = 50; i > 0; i -= 2)
     {
         changeServoPosition(j);
         delay(200);
@@ -55,7 +55,6 @@ void checkBoatDetection()
         while (distance < 10)
         {
             distance = getCurrentDistance();
-            delay(1000);
         }
 
         delay(5000);
