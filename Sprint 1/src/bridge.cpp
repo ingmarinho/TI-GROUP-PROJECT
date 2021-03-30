@@ -1,6 +1,43 @@
 #include "bridge.h"
 #include "hardware.h"
 
+PI_THREAD(closeRightBarrier)
+{
+    for (unsigned int i = 100; i > 50; i -= 2)
+    {
+        changeServoPosition(SERV2, i);
+        delay(200);
+    }
+    return 0;
+}
+PI_THREAD(closeLeftBarrier)
+{
+    for (unsigned int i = 50; i < 100; i += 2)
+    {
+        changeServoPosition(SERV3, i);
+        delay(200);
+    }
+    return 0;
+}
+PI_THREAD(openRightBarrier)
+{
+    for (unsigned int i = 100; i > 50; i -= 2)
+    {
+        changeServoPosition(SERV2, i);
+        delay(200);
+    }
+    return 0;
+}
+PI_THREAD(openLeftBarrier)
+{
+    for (unsigned int i = 50; i < 100; i += 2)
+    {
+        changeServoPosition(SERV3, i);
+        delay(200);
+    }
+    return 0;
+}
+
 int openBridge()
 {
     for (unsigned int i = 0; i < 50; i += 2)
@@ -43,43 +80,6 @@ int openBarriers()
     int leftBarrier = piThreadCreate(openLeftBarrier);
     if (leftBarrier != 0)
         cout << "Left barrier could not be closed!" << endl;    
-    return 0;
-}
-
-PI_THREAD(closeRightBarrier)
-{
-    for (unsigned int i = 100; i > 50; i -= 2)
-    {
-        changeServoPosition(SERV2, i);
-        delay(200);
-    }
-    return 0;
-}
-PI_THREAD(closeLeftBarrier)
-{
-    for (unsigned int i = 50; i < 100; i += 2)
-    {
-        changeServoPosition(SERV3, i);
-        delay(200);
-    }
-    return 0;
-}
-PI_THREAD(openRightBarrier)
-{
-    for (unsigned int i = 100; i > 50; i -= 2)
-    {
-        changeServoPosition(SERV2, i);
-        delay(200);
-    }
-    return 0;
-}
-PI_THREAD(openLeftBarrier)
-{
-    for (unsigned int i = 50; i < 100; i += 2)
-    {
-        changeServoPosition(SERV3, i);
-        delay(200);
-    }
     return 0;
 }
 
