@@ -5,7 +5,13 @@
 
 using namespace std;
 
-int BEEP = 19;
+int BEEP = 24; // GPIO 19
+
+void setup()
+{
+    wiringPiSetup();
+    pinMode(BEEP, OUTPUT);
+}
 
 void beep(const int &pin, const unsigned int &delay1, const unsigned int &wait_time)
 {
@@ -15,31 +21,35 @@ void beep(const int &pin, const unsigned int &delay1, const unsigned int &wait_t
     usleep(wait_time);
 }
 
-void morse(const int &pin, int &dot_length, string &text)
+void morse(const int &pin, const float &dot_length, const string &text)
 {
+    dot_length *= 1000000;
 
-    for (char &t : text)
+    for (unsigned int i = 0; i < text.size(); i++)
     {
-        if (t == '.')
+        if (text[i] == '.')
         {
             digitalWrite(pin, HIGH);
             usleep(dot_length * 1);
             digitalWrite(pin, LOW);
             usleep(dot_length * 1);
         }
-        if (t == '-')
+        else if (text[i] == '-')
         {
             digitalWrite(pin, HIGH);
             usleep(dot_length * 3);
             digitalWrite(pin, LOW);
             usleep(dot_length * 1);
         }
-        if (t == ' ')
+        else if (text[i] == ' ')
         {
             usleep(dot_length * 3);
         }
     }
 }
 
-led = 26 GPIO.setup(led, GPIO.OUT)
-          morse(18, 0.2, ".--. -.-- - .... --- -.")
+int main()
+{
+    setup();
+    morse(BEEP, 0.2f, ".--. -.-- - .... --- -.");
+}
