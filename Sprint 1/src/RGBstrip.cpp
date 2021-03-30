@@ -55,6 +55,7 @@ void binearmaker(int num, vector<bool> &end)
 void ledcall(int pos, string color)
 {
     ledarray[pos] = translate(color);
+    cout << "led " << pos << " is nu " << color << " met RGB waardes " << ledarray[pos][0] << ", " << ledarray[pos][1] << ", " << ledarray[pos][2] << ".\n";
     digitalWrite(infopin, LOW);
     for (int i = 0; i < 32; i++)
     {
