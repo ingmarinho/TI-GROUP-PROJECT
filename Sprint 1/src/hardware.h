@@ -12,7 +12,7 @@
 
 #define SERV1 5     // GPIO 25 | Physical 22 | Output servo (SERV1) (BRIDGE)
 #define SERV2 31    // GPIO 26 | Physical 37 | Output servo (SERV2) (BARRIER 1)
-#define SERV3 0     // (SERV3) (BARRIER 2)
+#define SERV3 26     // (SERV3) (BARRIER 2)
 
 #define CLCK 10     // GPIO 8  | Physical 28 | Output led strip (CLCK) (TRAFFIC LIGHTS)
 #define INFO 6     // GPIO 25 | Physical 32 | Output led strip (INFO) (TRAFFIC LIGHTS)
@@ -23,6 +23,6 @@ using namespace std;
 void setup();
 void pulse(const int pin, const float delay1, const float delay2);
 int changeServoPositionBridge(const int position);
-int changeServoPositionBarriers(const int position);
+int changeServoPositionBarriers(const int pin, const int position);
 int getCurrentDistanceFront();
 int getCurrentDistanceBack();
