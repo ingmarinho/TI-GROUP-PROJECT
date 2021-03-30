@@ -11,11 +11,12 @@ void testHardware()
         x++;
     }
 
-    changeServoPosition(0);
-    delay(5000);
-    changeServoPosition(50);
-    delay(5000);
-    changeServoPosition(0);
+
+    for (unsigned int i = 0; i < 100; i++)
+    {
+        changeServoPosition(i);
+        delay(100);
+    }
    
 }
 
