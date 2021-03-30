@@ -3,7 +3,7 @@
 
 PI_THREAD(closeRightBarrier)
 {
-    for (unsigned int i = 100; i > 50; i -= 2)
+    for (unsigned int i = 50; i < 100; i += 2)
     {
         changeServoPosition(SERV2, i);
         delay(200);
@@ -12,7 +12,7 @@ PI_THREAD(closeRightBarrier)
 }
 PI_THREAD(closeLeftBarrier)
 {
-    for (unsigned int i = 50; i < 100; i += 2)
+    for (unsigned int i = 100; i > 50; i -= 2)
     {
         changeServoPosition(SERV3, i);
         delay(200);
@@ -21,7 +21,7 @@ PI_THREAD(closeLeftBarrier)
 }
 PI_THREAD(openRightBarrier)
 {
-    for (unsigned int i = 100; i > 50; i -= 2)
+    for (unsigned int i = 50; i < 100; i += 2)
     {
         changeServoPosition(SERV2, i);
         delay(200);
@@ -30,7 +30,7 @@ PI_THREAD(openRightBarrier)
 }
 PI_THREAD(openLeftBarrier)
 {
-    for (unsigned int i = 50; i < 100; i += 2)
+    for (unsigned int i = 100; i > 50; i -= 2)
     {
         changeServoPosition(SERV3, i);
         delay(200);
@@ -94,6 +94,8 @@ void checkBoatDetection()
 
         if (leftBarrierClose == 0 && rightBarrierClose == 0))
             cout << "Barriers are closing!" << endl;
+        
+        delay(3000);
 
         if (openBridge() == 0)
             cout << "Bridge has been opened!" << endl;
