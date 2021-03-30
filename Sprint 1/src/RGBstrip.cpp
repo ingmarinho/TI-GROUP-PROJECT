@@ -81,34 +81,27 @@ void ledcall(int pos, string color)
 
 void stoplight(string state)
 {
-    if (cstate != state)
+    while (cstate != state)
     {
         if (cstate == "red") { cstate = "yellow"; }
-        else if (cstate == "yellow") { cstate = state; }
-        else if (cstate == "green") { cstate = "yellow"; }
+        else { cstate = state; }
+        ledcall(0,cstate);
+        ledcall(1,cstate);
+        ledcall(2,cstate);
+        ledcall(3,cstate);
+        ledcall(4,cstate);
+        ledcall(5,cstate);
+        ledcall(6,cstate);
+        ledcall(7,cstate);
+        if (cstate != state);
+            usleep(1000);
     }
-    ledcall(0,cstate);
-    ledcall(1,cstate);
-    ledcall(2,cstate);
-    ledcall(3,cstate);
-    ledcall(4,cstate);
-    ledcall(5,cstate);
-    ledcall(6,cstate);
-    ledcall(7,cstate);
 }
 
 int main()
 {
     setup();
-    // while (cstate != "red")
-    // {
-    //     stoplight("red");
-    //     cout << cstate << "\n";
-    // }
-    while (true)
-    {
-        // stoplight("green");
-        // cout << cstate << "\n";
-        cout << mktime(struct tm gmtime) << " ";
-    }
+    stoplight("red");
+    usleep(1000);
+    stoplight("green");
 }
