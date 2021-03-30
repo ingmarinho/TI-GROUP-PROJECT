@@ -58,6 +58,8 @@ void checkBoatDetection()
             delay(1000);
         }
 
+        delay(5000);
+
         if (closeBridge() == 0)
             cout << "Bridge has been closed!" << endl;
     }
