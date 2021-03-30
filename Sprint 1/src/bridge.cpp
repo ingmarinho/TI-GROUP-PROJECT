@@ -23,14 +23,19 @@ int closeBridge()
 
 void checkBoatDetection()
 {
-    int distance = getCurrentDistance();
-    if (distance < 10)
+    int distanceFront = getCurrentDistanceFront();
+    int distanceBack = getCurrentDistanceBack();
+
+    if (distanceFront < 10 || distanceBack < 10)
     {
         if (openBridge() == 0)
             cout << "Bridge has been opened!" << endl;
 
-        while (distance < 10)
-            distance = getCurrentDistance();
+        while (distanceFront < 10 || distanceBack < 10)
+        {
+            distanceFront = getCurrentDistanceFront();
+            distanceBack = getCurrentDistanceBack();
+        }
 
         delay(5000);
 
