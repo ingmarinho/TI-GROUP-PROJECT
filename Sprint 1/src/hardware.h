@@ -11,7 +11,7 @@
 #define ECHO2 4     // (ECHO2) (BOAT DETECTION BACK)
 
 #define SERV1 5     // GPIO 25 | Physical 22 | Output servo (SERV1) (BRIDGE)
-#define SERV2 25    // GPIO 26 | Physical 37 | Output servo (SERV2) (BARRIER 1)
+#define SERV2 31    // GPIO 26 | Physical 37 | Output servo (SERV2) (BARRIER 1)
 #define SERV3 0     // (SERV3) (BARRIER 2)
 
 #define CLCK 10     // GPIO 8  | Physical 28 | Output led strip (CLCK) (TRAFFIC LIGHTS)
