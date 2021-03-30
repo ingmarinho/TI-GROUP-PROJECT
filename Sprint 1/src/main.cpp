@@ -11,22 +11,22 @@ void testHardware()
         x++;
     }
 
-    for (unsigned int i = 0; i < 100; i += 2)
+    for (unsigned int i = 0; i < 50; i += 2)
     {
         changeServoPosition(i);
         delay(200);
     }
 
-    for (unsigned int j = 100; j > 0; j -= 2)
+    for (unsigned int j = 50; j > 0; j -= 2)
     {
-        changeServoPosition(i);
+        changeServoPosition(j);
         delay(200);
     }
 }
 
 int openBridge()
 {
-    for (unsigned int i = 0; i < 100; i += 2)
+    for (unsigned int i = 0; i < 50; i += 2)
     {
         changeServoPosition(i);
         delay(200);
@@ -36,9 +36,9 @@ int openBridge()
 
 int closeBridge()
 {
-    for (unsigned int j = 100; j > 0; j -= 2)
+    for (unsigned int j = 50; j > 0; j -= 2)
     {
-        changeServoPosition(i);
+        changeServoPosition(j);
         delay(200);
     }
     return 0;
@@ -47,12 +47,12 @@ int closeBridge()
 void checkBoatDetection()
 {
     int distance = getCurrentDistance();
-    if (distance < 100)
+    if (distance < 10)
     {
         if (openBridge() == 0)
             cout << "Bridge has been opened!" << endl;
             
-        while (distance < 100)
+        while (distance < 10)
         {
             distance = getCurrentDistance();
             delay(1000);
@@ -67,7 +67,7 @@ void checkBoatDetection()
 int main()
 {
     setup();
-    testHardware();
+    // testHardware();
     while (true)
     {
         checkBoatDetection();
