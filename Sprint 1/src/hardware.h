@@ -5,8 +5,8 @@
 #include <wiringPi.h>
 
 
-#define TRIG1 28    // GPIO 8  | Physical 24 | Output distance sensor (TRIG1) (BOAT DETECTION FRONT)
-#define ECHO1 29    // GPIO 7  | Physical 26 | Input distance sensor (ECHO1) (BOAT DETECTION FRONT)
+#define TRIG1 16    // GPIO 15  | Physical  | Output distance sensor (TRIG1) (BOAT DETECTION FRONT)
+#define ECHO1 15    // GPIO 14  | Physical  | Input distance sensor (ECHO1) (BOAT DETECTION FRONT)
 #define TRIG2 0     // (TRIG2) (BOAT DETECTION BACK)
 #define ECHO2 0     // (ECHO2) (BOAT DETECTION BACK)
 
@@ -23,5 +23,5 @@ using namespace std;
 void setup();
 void pulse(const int pin, const float delay1, const float delay2);
 int changeServoPosition(const int position);
-int getCurrentDistanceFront()
-int getCurrentDistanceBack()
+int getCurrentDistanceFront();
+int getCurrentDistanceBack();
