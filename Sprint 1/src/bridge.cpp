@@ -60,8 +60,8 @@ int closeBridge()
 
 int closeBarriers()
 {
-    int rightBarrier = piThreadCreate(closeRightBarrier);
-    int leftBarrier = piThreadCreate(closeLeftBarrier);
+    int rightBarrierClose = piThreadCreate(closeRightBarrier);
+    int leftBarrierClose = piThreadCreate(closeLeftBarrier);
 
     delay(3000);
 
@@ -89,7 +89,10 @@ void checkBoatDetection()
 
     if (distanceFront < 10 || distanceBack < 10)
     {
-        if (closeBarriers() == 0)
+        int rightBarrierClose = piThreadCreate(closeRightBarrier);
+        int leftBarrierClose = piThreadCreate(closeLeftBarrier);
+
+        if (leftBarrierClose == 0 && rightBarrierClose == 0))
             cout << "Barriers are closing!" << endl;
 
         if (openBridge() == 0)
@@ -106,7 +109,10 @@ void checkBoatDetection()
         if (closeBridge() == 0)
             cout << "Bridge has been closed!" << endl;
 
-        if (openBarriers() == 0)
+        int rightBarrierOpen = piThreadCreate(openRightBarrier);
+        int leftBarrierOpen = piThreadCreate(openLeftBarrier);
+
+        if (leftBarrierOpen == 0 && rightBarrierOpen == 0)
             cout << "Barriers are opening!" << endl;
     }
 }
