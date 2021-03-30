@@ -85,7 +85,7 @@ void checkBoatDetection()
 
     if (distanceFront < 10 || distanceBack < 10)
     {
-        if (openBarriers() == 0))
+        if (openBarriers() == 0)
             cout << "Barriers are closing!" << endl;
 
         if (openBridge() == 0)
