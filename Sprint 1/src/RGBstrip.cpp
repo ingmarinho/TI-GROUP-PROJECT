@@ -68,14 +68,12 @@ void ledcall(int pos, string color)
         }
         for (int k = 0; k < led.size(); k++)
         {
-            cout << led[k] << " "; 
             if (led[k])
                 digitalWrite(infopin, HIGH);
             digitalWrite(clockpin, HIGH);
             digitalWrite(clockpin, LOW);
             digitalWrite(infopin, LOW);
         }
-        cout << "\n"; 
     }
 }
 
