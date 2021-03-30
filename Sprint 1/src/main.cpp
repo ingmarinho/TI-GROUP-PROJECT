@@ -11,8 +11,11 @@ void testHardware()
     //     x++;
     // }
 
-    changeServoPosition(1);
-
+    changeServoPosition(0);
+    delay(5000);
+    changeServoPosition(50);
+    delay(5000);
+    changeServoPosition(0);
 }
 
 

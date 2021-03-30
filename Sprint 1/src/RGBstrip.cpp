@@ -4,8 +4,8 @@
 
 using namespace std;
 
-int clockpin = 10;
-int infopin = 11;
+int clockpin = 31;
+int infopin = 26;
 
 void setup()
 {
@@ -66,14 +66,16 @@ void ledcall(int pos, string color)
         {
             binearmaker(ledarray[i][j], led);
         }
-        for (int j = 0; j < led.size(); j++)
+        for (int k = 0; k < led.size(); k++)
         {
-            if (led[j])
+            cout << led[k] << " "; 
+            if (led[k])
                 digitalWrite(infopin, HIGH);
             digitalWrite(clockpin, HIGH);
             digitalWrite(clockpin, LOW);
             digitalWrite(infopin, LOW);
         }
+        cout << "\n"; 
     }
 }
 
@@ -81,6 +83,14 @@ int main()
 {
     setup();
     ledcall(0, "yellow");
+    ledcall(1, "lblue");
+    ledcall(2, "purple");
     ledcall(3, "white");
+    ledcall(4, "orange");
+    ledcall(5, "red");
+    ledcall(6, "blue");
     ledcall(7, "green");
+    ledcall(2, "red");
+    ledcall(5, "lblue");
+    ledcall(7, "blue");
 }
