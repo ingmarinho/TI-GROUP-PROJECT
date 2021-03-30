@@ -109,8 +109,11 @@ int main()
     ledcall(5,cstate);
     ledcall(6,cstate);
     ledcall(7,cstate);
-    usleep(1000);
-    stoplight("red");
-    usleep(1000);
-    stoplight("green");
+    while (true)
+    {
+        usleep(1000);
+        stoplight("red");
+        usleep(1000);
+        stoplight("green");
+    }
 }
