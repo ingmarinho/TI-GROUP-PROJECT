@@ -3,7 +3,7 @@
 
 PI_THREAD(closeRightBarrier)
 {
-    for (unsigned int i = 50; i < 100; i += 2)
+    for (unsigned int i = 100; i > 50; i -= 2)
     {
         changeServoPosition(SERV2, i);
         delay(200);
@@ -30,7 +30,7 @@ PI_THREAD(openRightBarrier)
 }
 int openLeftBarrier()
 {
-    for (unsigned int i = 100; i > 50; i -= 2)
+    for (unsigned int i = 50; i < 100; i += 2)
     {
         changeServoPosition(SERV3, i);
         delay(200);
@@ -60,8 +60,8 @@ int closeBridge()
 
 int closeBarriers()
 {
-    int rightBarrierClose = piThreadCreate(closeRightBarrier);
-    int leftBarrierClose = closeLeftBarrier();
+    int rightBarrier = piThreadCreate(closeRightBarrier);
+    int leftBarrier = closeLeftBarrier();
 
     if (leftBarrier == 0 && rightBarrier == 0)
         return 0;
