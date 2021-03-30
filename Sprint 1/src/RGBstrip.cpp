@@ -1,5 +1,5 @@
 #include <iostream>
-// #include <wiringPi.h>
+#include <wiringPi.h>
 #include <vector>
 #include <time.h>
 
@@ -10,9 +10,9 @@ int infopin = 26;
 
 void setup()
 {
-    // wiringPiSetup();
-    // pinMode(clockpin, OUTPUT);
-    // pinMode(infopin, OUTPUT);
+    wiringPiSetup();
+    pinMode(clockpin, OUTPUT);
+    pinMode(infopin, OUTPUT);
 }
 
 vector<vector<int>> ledarray = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
@@ -55,11 +55,11 @@ void binearmaker(int num, vector<bool> &end)
 void ledcall(int pos, string color)
 {
     ledarray[pos] = translate(color);
-    // digitalWrite(infopin, LOW);
+    digitalWrite(infopin, LOW);
     for (int i = 0; i < 32; i++)
     {
-        // digitalWrite(clockpin, HIGH);
-        // digitalWrite(clockpin, LOW);
+        digitalWrite(clockpin, HIGH);
+        digitalWrite(clockpin, LOW);
     }
     for (int i = 0; i < ledarray.size(); i++)
     {
@@ -70,11 +70,11 @@ void ledcall(int pos, string color)
         }
         for (int k = 0; k < led.size(); k++)
         {
-            // if (led[k])
-            //     digitalWrite(infopin, HIGH);
-            // digitalWrite(clockpin, HIGH);
-            // digitalWrite(clockpin, LOW);
-            // digitalWrite(infopin, LOW);
+            if (led[k])
+                digitalWrite(infopin, HIGH);
+            digitalWrite(clockpin, HIGH);
+            digitalWrite(clockpin, LOW);
+            digitalWrite(infopin, LOW);
         }
     }
 }
