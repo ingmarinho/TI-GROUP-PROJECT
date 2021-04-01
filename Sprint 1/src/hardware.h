@@ -21,7 +21,8 @@
 #define CLCK 10     // GPIO 8 | Output led strip (CLCK) (BRIDGE LIGHT)
 #define INFO 6     // GPIO 25 | Output led strip (INFO) (BRIDGE LIGHT)
 
-#define BEEP 
+#define BEEP 28
+
 using namespace std;
 
 void setup();
@@ -30,4 +31,5 @@ int changeServoPosition(const int pin, const int position);
 int getCurrentDistance(const int trig_pin, const int echo_pin);
 int activateLeds();
 int activateBoatTrafficLight(bool color);
+int barrierSound();
 void send_bytes(vector<bool> bytes);

@@ -1,7 +1,7 @@
 #include "bridge.h"
 #include "hardware.h"
 
-static volatile bool globalCounter = 0;
+static volatile bool sequenceStart = 0;
 
 PI_THREAD(closeRightBarrier)
 {
@@ -90,13 +90,27 @@ int openBarriers()
     return 1;
 }
 
+int playBarrierSound()
+{
+    for (unsigned int i = 0; i < 5)
+    {
+        barrierSound();
+        delay(200);
+    }
+}
+
+
 void startBridgeSequence(int &distanceFront, int &distanceBack)
 { 
-    globalCounter = 0;
+    sequenceStart = 0;
 
     int trafficLights = piThreadCreate(activateTrafficLights);
 
     delay(3000);
+
+    playBarrierSound();
+
+    delay(1000);
 
     if (openBarriers() == 0)
         cout << "Barriers are closing!" << endl;
@@ -119,12 +133,16 @@ void startBridgeSequence(int &distanceFront, int &distanceBack)
     if (closeBridge() == 0)
         cout << "Bridge has been closed!" << endl;
 
+    delay(1000);
+
+    playBarrierSound();
+
     if (closeBarriers() == 0)
         cout << "Barriers are opening!" << endl;
 
     delay(3000);
 
-    globalCounter = 1;
+    sequenceStart = 1;
 }
 
 void checkBoatDetection()

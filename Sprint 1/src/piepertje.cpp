@@ -13,15 +13,15 @@ void setup()
     pinMode(BEEP, OUTPUT);
 }
 
-void beep(const int &pin, const unsigned int &delay1, const unsigned int &wait_time)
+void beep(const int &pin, const unsigned int &delay, const unsigned int &wait_time)
 {
     digitalWrite(pin, HIGH);
-    usleep(delay1);
+    usleep(delay);
     digitalWrite(pin, LOW);
     usleep(wait_time);
 }
 
-void morse(const int &pin, const float &dot_length, const string &text)
+void morse(const int &pin, float &dot_length, const string &text)
 {
     dot_length *= 1000000;
 

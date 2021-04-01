@@ -1,27 +1,10 @@
 #include "hardware.h"
 
-// void knop()
-// {
-//     while (true)
-//     {
-//         if (digitalRead(5) == HIGH)
-//         {
-//             digitalWrite(4, HIGH);
-//         }
-//         else
-//         {
-//             digitalWrite(4, LOW);
-//         }
-//         delay(100);
-//     }
-// }
 
 void setup()
 {
     wiringPiSetup();
 
-    // pinMode(4, OUTPUT);      // GPIO 23 | Output knop
-    // pinMode(5, INPUT);       // GPIO 24 | Input knop
     pinMode(TRIG1, OUTPUT); // GPIO 15 | Output distance sensor (TRIG1) (BOAT DETECTION FRONT)
     pinMode(ECHO1, INPUT);  // GPIO 14 | Input distance sensor (ECHO1) (BOAT DETECTION FRONT)
     pinMode(TRIG2, OUTPUT); // GPIO 18 | Output distance sensor (TRIG2) (BOAT DETECTION BACK)
@@ -36,6 +19,8 @@ void setup()
 
     pinMode(CLCK, OUTPUT); // GPIO 1  | Output led strip (CLCK) (BRIDGE LIGHTS)
     pinMode(INFO, OUTPUT); // GPIO 12 | Output led strip (INFO) (BRIDGE LIGHTS)
+
+    pinMode(BEEP, OUTPUT);
 }
 
 void pulse(const int &pin, const unsigned int &delay1, const unsigned int &wait_time)
@@ -71,30 +56,29 @@ int activateLeds()
 
 void send_bytes(vector<bool> bytes)
 {
-
     vector<bool> k = {};
 
     for (unsigned int i = 0; i < bytes.size(); i++)
     {
-        if (i == 0 && bytes[i] == 1)
+        if (i == 0 && bytes[i])
         {
-            k = {1,1,1,0,0,0,1,0};
+            k = {1, 1, 1, 0, 0, 0, 1, 0};
         }
-        else if (i != 0 && bytes[i] == 1)
+        else if (i != 0 && bytes[i])
         {
-            k = {1,1,1,1,1,1,1,1};
+            k = {1, 1, 1, 1, 1, 1, 1, 1};
         }
         else
         {
-            k = {0,0,0,0,0,0,0,0};
+            k = {0, 0, 0, 0, 0, 0, 0, 0};
         }
 
         for (unsigned int j = 0; j < k.size(); j++)
         {
-            if (!k[j])
-                digitalWrite(INFO, LOW);
-            else
+            if (k[j])
                 digitalWrite(INFO, HIGH);
+            else
+                digitalWrite(INFO, LOW);
             digitalWrite(CLCK, HIGH);
             digitalWrite(CLCK, LOW);
         }
@@ -116,6 +100,13 @@ int activateBoatTrafficLight(bool color) // 0 = rood | 1 = groen
     return 0;
 }
 
+int barrierSound()
+{
+    digitalWrite(BEEP, HIGH);
+    delay(200)
+    digitalWrite(BEEP, LOW);
+    return 0;
+}
 
 int getCurrentDistance(const int trig_pin, const int echo_pin)
 {
@@ -123,11 +114,9 @@ int getCurrentDistance(const int trig_pin, const int echo_pin)
     delay(20);
     digitalWrite(trig_pin, LOW);
 
-    while (digitalRead(echo_pin) == LOW)
-        ;
+    while (digitalRead(echo_pin) == LOW);
     long int startTime = micros();
-    while (digitalRead(echo_pin) == HIGH)
-        ;
+    while (digitalRead(echo_pin) == HIGH);
 
     long int travelTime = micros() - startTime;
 
