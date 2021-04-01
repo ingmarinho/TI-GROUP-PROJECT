@@ -28,7 +28,8 @@
 int main()
 {
     setup();
-    // testHardware();
+    activateBoatTrafficLight(0);
+    
     while (true)
     {
         checkBoatDetection();

@@ -22,20 +22,20 @@ void setup()
 
     // pinMode(4, OUTPUT);      // GPIO 23 | Output knop
     // pinMode(5, INPUT);       // GPIO 24 | Input knop
-    pinMode(TRIG1, OUTPUT);     // GPIO 15 | Output distance sensor (TRIG1) (BOAT DETECTION FRONT)
-    pinMode(ECHO1, INPUT);      // GPIO 14 | Input distance sensor (ECHO1) (BOAT DETECTION FRONT)
-    pinMode(TRIG2, OUTPUT);     // GPIO 18 | Output distance sensor (TRIG2) (BOAT DETECTION BACK)
-    pinMode(ECHO2, INPUT);      // GPIO 23 | Input distance sensor (ECHO2) (BOAT DETECTION BACK)
+    pinMode(TRIG1, OUTPUT); // GPIO 15 | Output distance sensor (TRIG1) (BOAT DETECTION FRONT)
+    pinMode(ECHO1, INPUT);  // GPIO 14 | Input distance sensor (ECHO1) (BOAT DETECTION FRONT)
+    pinMode(TRIG2, OUTPUT); // GPIO 18 | Output distance sensor (TRIG2) (BOAT DETECTION BACK)
+    pinMode(ECHO2, INPUT);  // GPIO 23 | Input distance sensor (ECHO2) (BOAT DETECTION BACK)
 
     pinMode(LED1, OUTPUT);
     pinMode(LED2, OUTPUT);
 
-    pinMode(SERV1, OUTPUT);     // GPIO 25 | Output servo (SERV1) (BRIDGE)
-    pinMode(SERV2, OUTPUT);     // GPIO 26 | Output servo (SERV2) (BARRIER 1)
-    pinMode(SERV3, OUTPUT);     // GPIO 12 | Output servo (SERV3) (SERV3) (BARRIER 2)
+    pinMode(SERV1, OUTPUT); // GPIO 25 | Output servo (SERV1) (BRIDGE)
+    pinMode(SERV2, OUTPUT); // GPIO 26 | Output servo (SERV2) (BARRIER 1)
+    pinMode(SERV3, OUTPUT); // GPIO 12 | Output servo (SERV3) (SERV3) (BARRIER 2)
 
-    pinMode(CLCK, OUTPUT);      // GPIO 1  | Output led strip (CLCK) (BRIDGE LIGHTS)
-    pinMode(INFO, OUTPUT);      // GPIO 12 | Output led strip (INFO) (BRIDGE LIGHTS)
+    pinMode(CLCK, OUTPUT); // GPIO 1  | Output led strip (CLCK) (BRIDGE LIGHTS)
+    pinMode(INFO, OUTPUT); // GPIO 12 | Output led strip (INFO) (BRIDGE LIGHTS)
 }
 
 void pulse(const int &pin, const unsigned int &delay1, const unsigned int &wait_time)
@@ -65,7 +65,44 @@ int activateLeds()
     delay(500);
     digitalWrite(LED1, 0);
     digitalWrite(LED2, 0);
+
+    return 0;
 }
+
+void send_bytes(vector<bool> bytes)
+{
+    for (unsigned int i = 0; i < bytes.size(); i++)
+    {
+        for (unsigned int j = 0; j < 7; j++)
+        {
+            if (!bytes[i])
+                digitalWrite(INFO, LOW);
+            else
+                digitalWrite(INFO, HIGH);
+            digitalWrite(CLCK, HIGH);
+            digitalWrite(CLCK, LOW);
+        }
+    }
+}
+
+int activateBoatTrafficLight(bool color) // 0 = rood | 1 = groen
+{
+    vector<bool> red = {1, 0, 0, 0};
+    vector<bool> green = {0, 1, 0, 0};
+
+    apa102_send_bytes({0, 0, 0, 0});
+    for (unsigned int j = 0; j < 7; j++)
+    {
+        if (!color)
+            apa102_send_bytes(red);
+        else
+            apa102_send_bytes(green);
+    }
+    apa102_send_bytes({1, 1, 1, 1});
+
+    return 0;
+}
+
 
 int getCurrentDistance(const int trig_pin, const int echo_pin)
 {

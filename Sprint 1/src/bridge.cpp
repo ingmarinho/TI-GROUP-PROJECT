@@ -1,8 +1,7 @@
 #include "bridge.h"
 #include "hardware.h"
 
-static volatile int globalCounter = 0;
-
+static volatile bool globalCounter = 0;
 
 PI_THREAD(closeRightBarrier)
 {
@@ -105,6 +104,8 @@ void startBridgeSequence(int &distanceFront, int &distanceBack)
     if (openBridge() == 0)
         cout << "Bridge has been opened!" << endl;
 
+    activateBoatTrafficLight(1);
+
     while (distanceFront < 10 || distanceBack < 10)
     {
         distanceFront = getCurrentDistance(TRIG1, ECHO1);
@@ -112,6 +113,8 @@ void startBridgeSequence(int &distanceFront, int &distanceBack)
     }
 
     delay(5000);
+
+    activateBoatTrafficLight(0);
 
     if (closeBridge() == 0)
         cout << "Bridge has been closed!" << endl;
@@ -121,8 +124,7 @@ void startBridgeSequence(int &distanceFront, int &distanceBack)
 
     delay(3000);
 
-    globalCounter++;
-
+    globalCounter = 1;
 }
 
 void checkBoatDetection()
