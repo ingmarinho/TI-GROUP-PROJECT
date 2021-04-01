@@ -48,6 +48,7 @@ PI_THREAD(activateTrafficLights)
         activateLeds();
         delay(200);
     }
+    return 0;
 }
 
 int openBridge()
@@ -96,6 +97,8 @@ void startBridgeSequence(int &distanceFront, int &distanceBack)
 
     int trafficLights = piThreadCreate(activateTrafficLights);
 
+    delay(3000);
+
     if (openBarriers() == 0)
         cout << "Barriers are closing!" << endl;
 
@@ -116,7 +119,10 @@ void startBridgeSequence(int &distanceFront, int &distanceBack)
     if (closeBarriers() == 0)
         cout << "Barriers are opening!" << endl;
 
+    delay(3000);
+
     globalCounter++;
+
 }
 
 void checkBoatDetection()
