@@ -73,9 +73,22 @@ void send_bytes(vector<bool> bytes)
 {
     for (unsigned int i = 0; i < bytes.size(); i++)
     {
-        for (unsigned int j = 0; j < 8; j++)
+        if (i == 0 && bytes[i] == 1)
         {
-            if (!bytes[i])
+            vector<bool> k = {1,1,1,0,0,0,1,0}
+        }
+        else if (i != 0 && bytes[i] == 1)
+        {
+            vector<bool> k = {1,1,1,1,1,1,1,1}
+        }
+        else
+        {
+            vector<bool> k = {0,0,0,0,0,0,0,0}
+        }
+
+        for (unsigned int j = 0; j < k.size(); j++)
+        {
+            if (!k[j])
                 digitalWrite(INFO, LOW);
             else
                 digitalWrite(INFO, HIGH);
@@ -89,7 +102,7 @@ int activateBoatTrafficLight(bool color) // 0 = rood | 1 = groen
 {
 
     send_bytes({0, 0, 0, 0});
-    for (unsigned int i = 0; i > 8; i++)
+    for (unsigned int i = 0; i < 8; i++)
     {
         if (!color)
             send_bytes({1, 0, 0, 1});
