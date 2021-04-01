@@ -1,6 +1,9 @@
 #include "bridge.h"
 #include "hardware.h"
 
+static volatile int globalCounter = 0;
+
+
 PI_THREAD(closeRightBarrier)
 {
     for (unsigned int i = 100; i > 50; i -= 2)
@@ -40,7 +43,7 @@ int openLeftBarrier()
 
 PI_THREAD(activateTrafficLights)
 {
-    while (piLock(0))
+    while (globalCounter == 0)
     {
         activateLeds();
         delay(200);
@@ -87,10 +90,12 @@ int openBarriers()
     return 1;
 }
 
-int startBridgeSequence(int &distanceFront, int &distanceBack)
-{
-    piLock(0);
-    
+void startBridgeSequence(int &distanceFront, int &distanceBack)
+{ 
+    globalCounter = 0;
+
+    int trafficLights = piThreadCreate(activateTrafficLights);
+
     if (openBarriers() == 0)
         cout << "Barriers are closing!" << endl;
 
@@ -111,7 +116,7 @@ int startBridgeSequence(int &distanceFront, int &distanceBack)
     if (closeBarriers() == 0)
         cout << "Barriers are opening!" << endl;
 
-    piUnlock(0);
+    globalCounter++;
 }
 
 void checkBoatDetection()
