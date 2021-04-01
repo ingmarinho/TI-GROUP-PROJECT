@@ -71,19 +71,22 @@ int activateLeds()
 
 void send_bytes(vector<bool> bytes)
 {
+
+    vector<bool> k = {};
+
     for (unsigned int i = 0; i < bytes.size(); i++)
     {
         if (i == 0 && bytes[i] == 1)
         {
-            vector<bool> k = {1,1,1,0,0,0,1,0}
+            k = {1,1,1,0,0,0,1,0};
         }
         else if (i != 0 && bytes[i] == 1)
         {
-            vector<bool> k = {1,1,1,1,1,1,1,1}
+            k = {1,1,1,1,1,1,1,1};
         }
         else
         {
-            vector<bool> k = {0,0,0,0,0,0,0,0}
+            k = {0,0,0,0,0,0,0,0};
         }
 
         for (unsigned int j = 0; j < k.size(); j++)
@@ -102,7 +105,7 @@ int activateBoatTrafficLight(bool color) // 0 = rood | 1 = groen
 {
 
     send_bytes({0, 0, 0, 0});
-    for (unsigned int i = 0; i < 8; i++)
+    for (unsigned int i = 0; i < 9; i++)
     {
         if (!color)
             send_bytes({1, 0, 0, 1});
