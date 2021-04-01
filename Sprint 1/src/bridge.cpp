@@ -38,6 +38,15 @@ int openLeftBarrier()
     return 0;
 }
 
+PI_THREAD(activateTrafficLights)
+{
+    while (piLock(0))
+    {
+        activateLeds();
+        delay(200);
+    }
+}
+
 int openBridge()
 {
     for (unsigned int i = 0; i < 50; i += 2)
@@ -78,31 +87,38 @@ int openBarriers()
     return 1;
 }
 
+int startBridgeSequence()
+{
+    piLock(0);
+    
+    if (openBarriers() == 0)
+        cout << "Barriers are closing!" << endl;
+
+    if (openBridge() == 0)
+        cout << "Bridge has been opened!" << endl;
+
+    while (distanceFront < 10 || distanceBack < 10)
+    {
+        distanceFront = getCurrentDistance(TRIG1, ECHO1);
+        distanceBack = getCurrentDistance(TRIG2, ECHO2);
+    }
+
+    delay(5000);
+
+    if (closeBridge() == 0)
+        cout << "Bridge has been closed!" << endl;
+
+    if (closeBarriers() == 0)
+        cout << "Barriers are opening!" << endl;
+
+    piUnlock(0);
+}
+
 void checkBoatDetection()
 {
     int distanceFront = getCurrentDistance(TRIG1, ECHO1);
     int distanceBack = getCurrentDistance(TRIG2, ECHO2);
 
     if (distanceFront < 10 || distanceBack < 10)
-    {
-        if (openBarriers() == 0)
-            cout << "Barriers are closing!" << endl;
-
-        if (openBridge() == 0)
-            cout << "Bridge has been opened!" << endl;
-
-        while (distanceFront < 10 || distanceBack < 10)
-        {
-            distanceFront = getCurrentDistance(TRIG1, ECHO1);
-            distanceBack =  getCurrentDistance(TRIG2, ECHO2);
-        }
-
-        delay(5000);
-
-        if (closeBridge() == 0)
-            cout << "Bridge has been closed!" << endl;
-
-        if (closeBarriers() == 0)
-            cout << "Barriers are opening!" << endl;
-    }
+        startBridgeSequence();
 }

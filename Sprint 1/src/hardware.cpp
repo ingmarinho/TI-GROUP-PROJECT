@@ -27,6 +27,9 @@ void setup()
     pinMode(TRIG2, OUTPUT);     // GPIO 18 | Output distance sensor (TRIG2) (BOAT DETECTION BACK)
     pinMode(ECHO2, INPUT);      // GPIO 23 | Input distance sensor (ECHO2) (BOAT DETECTION BACK)
 
+    pinMode(LED1, OUTPUT);
+    pinMode(LED2, OUTPUT);
+
     pinMode(SERV1, OUTPUT);     // GPIO 25 | Output servo (SERV1) (BRIDGE)
     pinMode(SERV2, OUTPUT);     // GPIO 26 | Output servo (SERV2) (BARRIER 1)
     pinMode(SERV3, OUTPUT);     // GPIO 12 | Output servo (SERV3) (SERV3) (BARRIER 2)
@@ -49,13 +52,20 @@ int changeServoPosition(const int pin, const int position) // 0 to 100 (0 to 180
     float step_size = 0.02f;
     float base_time = 0.4f;
     unsigned int servo_pulse_time = (base_time + (position * step_size)) * 1000; // conversion to microseconds (usleep is in microseconds)
-    
+
     pulse(pin, servo_pulse_time, wait_time);
 
     return 0;
 }
 
-
+int activateLeds()
+{
+    digitalWrite(LED1, 1);
+    digitalWrite(LED2, 1);
+    delay(500);
+    digitalWrite(LED1, 0);
+    digitalWrite(LED2, 0);
+}
 
 int getCurrentDistance(const int trig_pin, const int echo_pin)
 {
@@ -63,9 +73,11 @@ int getCurrentDistance(const int trig_pin, const int echo_pin)
     delay(20);
     digitalWrite(trig_pin, LOW);
 
-    while (digitalRead(echo_pin) == LOW);
+    while (digitalRead(echo_pin) == LOW)
+        ;
     long int startTime = micros();
-    while (digitalRead(echo_pin) == HIGH);
+    while (digitalRead(echo_pin) == HIGH)
+        ;
 
     long int travelTime = micros() - startTime;
 
@@ -73,4 +85,3 @@ int getCurrentDistance(const int trig_pin, const int echo_pin)
 
     return distance;
 }
-
