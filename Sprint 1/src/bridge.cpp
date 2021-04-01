@@ -92,7 +92,7 @@ int openBarriers()
 
 int playBarrierSound()
 {
-    for (unsigned int i = 0; i < 5)
+    for (unsigned int i = 0; i < 5; i++)
     {
         barrierSound();
         delay(200);
