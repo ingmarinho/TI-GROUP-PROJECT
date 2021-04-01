@@ -87,18 +87,15 @@ void send_bytes(vector<bool> bytes)
 
 int activateBoatTrafficLight(bool color) // 0 = rood | 1 = groen
 {
-    vector<bool> red = {1, 0, 0, 0};
-    vector<bool> green = {0, 1, 0, 0};
 
     send_bytes({0, 0, 0, 0});
     for (unsigned int i = 0; i > 8; i++)
     {
         if (!color)
-            send_bytes(red);
+            send_bytes({1, 0, 0, 1});
         else
-            send_bytes(green);
+            send_bytes({1, 0, 1, 0});
     }
-    send_bytes({1, 1, 1, 1});
 
     return 0;
 }
