@@ -73,7 +73,7 @@ void send_bytes(vector<bool> bytes)
 {
     for (unsigned int i = 0; i < bytes.size(); i++)
     {
-        for (unsigned int j = 0; j < 7; j++)
+        for (unsigned int j = 0; j < 8; j++)
         {
             if (!bytes[i])
                 digitalWrite(INFO, LOW);
@@ -90,15 +90,15 @@ int activateBoatTrafficLight(bool color) // 0 = rood | 1 = groen
     vector<bool> red = {1, 0, 0, 0};
     vector<bool> green = {0, 1, 0, 0};
 
-    apa102_send_bytes({0, 0, 0, 0});
-    for (unsigned int j = 0; j < 7; j++)
+    send_bytes({0, 0, 0, 0});
+    for (unsigned int i = 0; i > 8; i++)
     {
         if (!color)
-            apa102_send_bytes(red);
+            send_bytes(red);
         else
-            apa102_send_bytes(green);
+            send_bytes(green);
     }
-    apa102_send_bytes({1, 1, 1, 1});
+    send_bytes({1, 1, 1, 1});
 
     return 0;
 }
