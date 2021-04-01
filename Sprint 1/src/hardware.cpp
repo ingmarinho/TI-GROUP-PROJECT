@@ -55,6 +55,8 @@ int changeServoPosition(const int pin, const int position) // 0 to 100 (0 to 180
     return 0;
 }
 
+
+
 int getCurrentDistance(const int trig_pin, const int echo_pin)
 {
     digitalWrite(trig_pin, HIGH);
