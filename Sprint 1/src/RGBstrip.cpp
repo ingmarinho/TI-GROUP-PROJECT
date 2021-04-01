@@ -18,7 +18,7 @@ void setup()
 vector<vector<int>> ledarray = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 string cstate = "green";
 
-vector<int> translate(string input)
+vector<int> translate(string input) //  vertalen van een string naar een RGB waarde.
 {
     if (input == "red")
         return vector<int>{0, 0, 255};
@@ -40,7 +40,7 @@ vector<int> translate(string input)
         return vector<int>{0, 0, 0};
 }
 
-void binearmaker(int num, vector<bool> &end)
+void binearmaker(int num, vector<bool> &end) // maakt van de waarde num naar een 8 bit vector.
 {
     int i = 128;
     while (i > 0)
@@ -54,22 +54,21 @@ void binearmaker(int num, vector<bool> &end)
 
 void ledcall(int pos, string color)
 {
-    ledarray[pos] = translate(color);
-    cout << "led " << pos << " is nu " << color << " met RGB waardes " << ledarray[pos][0] << ", " << ledarray[pos][1] << ", " << ledarray[pos][2] << ".\n";
+    ledarray[pos] = translate(color); // maakt van de string een waarde in de ledarray
     digitalWrite(infopin, LOW);
-    for (int i = 0; i < 32; i++)
+    for (int i = 0; i < 32; i++) // 32 nullen
     {
         digitalWrite(clockpin, HIGH);
         digitalWrite(clockpin, LOW);
     }
-    for (int i = 0; i < ledarray.size(); i++)
+    for (int i = 0; i < ledarray.size(); i++) // loop langs alle leds
     {
-        vector<bool> led = {1, 1, 1, 0, 0, 0, 1, 0};
-        for (int j = 0; j < ledarray[i].size(); j++)
+        vector<bool> led = {1, 1, 1, 0, 0, 0, 1, 0}; // zet de felheid op "2"
+        for (int j = 0; j < ledarray[i].size(); j++) // loop dor de RGB waardes van een inviduele led.
         {
-            binearmaker(ledarray[i][j], led);
+            binearmaker(ledarray[i][j], led); // maakt er een vector met 32 waardes van.
         }
-        for (int k = 0; k < led.size(); k++)
+        for (int k = 0; k < led.size(); k++) // loopt door alle 32 bits voor een enkele led heen en stuurt die op.
         {
             if (led[k])
                 digitalWrite(infopin, HIGH);
@@ -80,27 +79,27 @@ void ledcall(int pos, string color)
     }
 }
 
-void stoplight(string state)
+void stoplight(string state) // stuur "green" of "red" op om naar die kleur te laten lopen.
 {
-    while (cstate != state)
+    while (cstate != state) // ga door tot dat de leds de kleur zijn die gevraagt word.
     {
         if (cstate == "green")
         {
-            cstate = "yellow";
+            cstate = "yellow";  // maakt van "green" naar "yellow"
         }
         else
         {
-            cstate = state;
+            cstate = state; // maakt van "yellow" naar "red" en van "red" naar "green"
         }
-        ledcall(7, cstate);
-        ledcall(1, cstate);
-        ledcall(2, cstate);
-        ledcall(3, cstate);
-        ledcall(4, cstate);
-        ledcall(5, cstate);
-        ledcall(6, cstate);
-        ledcall(0, cstate);
-        if (cstate != state)
+        ledcall(7,cstate); // zet de leds naar de juiste kleur
+        ledcall(1,cstate);
+        ledcall(2,cstate);
+        ledcall(3,cstate);
+        ledcall(4,cstate);
+        ledcall(5,cstate);
+        ledcall(6,cstate);
+        ledcall(0,cstate);
+        if (cstate != state) // slaap als het naar red toe moet.
             usleep(1000000);
     }
 }
@@ -108,15 +107,15 @@ void stoplight(string state)
 int main()
 {
     setup();
-    ledcall(7, cstate);
-    ledcall(1, cstate);
-    ledcall(2, cstate);
-    ledcall(3, cstate);
-    ledcall(4, cstate);
-    ledcall(5, cstate);
-    ledcall(6, cstate);
-    ledcall(0, cstate);
-    while (true)
+    ledcall(7,cstate);
+    ledcall(1,cstate);
+    ledcall(2,cstate);
+    ledcall(3,cstate);
+    ledcall(4,cstate);
+    ledcall(5,cstate);
+    ledcall(6,cstate);
+    ledcall(0,cstate);
+    while (true) // loop er lekker door heen.
     {
         usleep(10000000);
         stoplight("red");
