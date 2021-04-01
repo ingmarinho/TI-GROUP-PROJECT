@@ -42,7 +42,7 @@ int openLeftBarrier()
 
 PI_THREAD(activateTrafficLights)
 {
-    while (globalCounter == 0)
+    while (sequenceStart == 0)
     {
         activateLeds();
         delay(200);
