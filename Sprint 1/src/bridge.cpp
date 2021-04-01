@@ -87,7 +87,7 @@ int openBarriers()
     return 1;
 }
 
-int startBridgeSequence()
+int startBridgeSequence(int &distanceFront, int &distanceBack)
 {
     piLock(0);
     
@@ -120,5 +120,5 @@ void checkBoatDetection()
     int distanceBack = getCurrentDistance(TRIG2, ECHO2);
 
     if (distanceFront < 10 || distanceBack < 10)
-        startBridgeSequence();
+        startBridgeSequence(distanceFront, distanceBack);
 }
