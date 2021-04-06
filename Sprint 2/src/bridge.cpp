@@ -2,6 +2,7 @@
 #include "hardware.h"
 
 static volatile bool sequenceStart = 0;
+int bridge_open_counter = 0;
 
 PI_THREAD(closeRightBarrier)
 {
@@ -118,9 +119,11 @@ void startBridgeSequence(int &distanceFront, int &distanceBack)
     if (openBarriers() == 0)
         cout << "Barriers are closing!" << endl;
 
-    if (openBridge() == 0)
-        cout << "Bridge has been opened!" << endl;
+    bridge_open_counter ++;
 
+    if (openBridge() == 0)
+        cout << "Bridge has been opened! Total times: " << bridge_open_counter << endl;
+    
     activateBoatTrafficLight(1);
 
     while (distanceFront < 10 || distanceBack < 10)
