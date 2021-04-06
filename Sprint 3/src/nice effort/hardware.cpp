@@ -51,7 +51,7 @@ void activateLeds()
     digitalWrite(LED2, 0);
 }
 
-void send_bytes(vector<bool> bytes)
+void send_bytes(std::vector<bool> bytes)
 {
     vector<bool> k = {};
 

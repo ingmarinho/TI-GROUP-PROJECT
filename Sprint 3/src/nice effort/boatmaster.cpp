@@ -3,9 +3,6 @@
 
 using namespace std;
 
-subscription s("boat", commandHandler);
-string message;
-
 void bridgeOpenRequest()
 {
     string answer;
@@ -16,7 +13,7 @@ void bridgeOpenRequest()
         startBridgeSequence();
     }
     else
-        sendCommand(p, "Opening bridge currently unavailable, please try again later");
+        cout << "NEE" << endl;
 }
 
 void commandHandler(string message)
@@ -40,3 +37,12 @@ void commandHandler(string message)
 //             break;
 //     }
 // }
+void receiveCommands()
+{
+	subscription s("boat", commandHandler);
+    string message;
+
+	cout << "waiting for messages" << endl;
+	cout << "type \'s\' to stop"  << endl;
+	cin.get();
+}

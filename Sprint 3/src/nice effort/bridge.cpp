@@ -1,6 +1,8 @@
 #include "bridge.h"
 #include "hardware.h"
 
+using namespace std;
+
 PI_THREAD(closeRightBarrier)
 {
     for (unsigned int i = 100; i > 50; i -= 2)
