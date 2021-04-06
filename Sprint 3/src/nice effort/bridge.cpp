@@ -67,9 +67,9 @@ void closeBridge()
 int closeBarriers()
 {
     int rightBarrier = piThreadCreate(closeRightBarrier);
-    int leftBarrier = closeLeftBarrier();
+    closeLeftBarrier();
 
-    if (leftBarrier == 0 && rightBarrier == 0)
+    if (rightBarrier == 0)
         return 0;
     return -1;
 }
@@ -77,9 +77,9 @@ int closeBarriers()
 int openBarriers()
 {
     int rightBarrier = piThreadCreate(openRightBarrier);
-    int leftBarrier = openLeftBarrier();
+    openLeftBarrier();
 
-    if (leftBarrier == 0 && rightBarrier == 0)
+    if (rightBarrier == 0)
         return 0;
     return -1;
 }
@@ -97,8 +97,8 @@ void startBridgeSequence()
 {
     sequenceStart = 0;
     
-    distanceFront = 0;
-    distanceBack = 0;
+    int distanceFront = 0;
+    int distanceBack = 0;
 
     int trafficLights = piThreadCreate(activateTrafficLights);
 
@@ -108,13 +108,11 @@ void startBridgeSequence()
 
     delay(1000);
 
-    if (openBarriers() == 0)
-        cout << "Barriers are closing!" << endl;
+    openBarriers();
+    cout << "Barriers are closing!" << endl;
 
-    countersadd();
-
-    if (openBridge() == 0)
-        cout << "Bridge has been opened!" << endl;
+    openBridge();
+    cout << "Bridge has been opened!" << endl;
 
     activateBoatTrafficLight(1);
 
@@ -128,21 +126,20 @@ void startBridgeSequence()
 
     activateBoatTrafficLight(0);
 
-    if (closeBridge() == 0)
-        cout << "Bridge has been closed!" << endl;
+    closeBridge();
+    cout << "Bridge has been closed!" << endl;
 
     delay(1000);
 
     playBarrierSound();
 
-    if (closeBarriers() == 0)
-        cout << "Barriers are opening!" << endl;
+    closeBarriers();
+    cout << "Barriers are opening!" << endl;
 
     delay(3000);
 
     sequenceStart = 1;
 }
-
 PI_THREAD(checkBoatDetection)
 {
     while (true)
@@ -151,7 +148,14 @@ PI_THREAD(checkBoatDetection)
         int distanceBack = getCurrentDistance(TRIG2, ECHO2);
 
         if (distanceFront < 10 || distanceBack < 10)
-            startBridgeSequence(distanceFront, distanceBack);
+            startBridgeSequence();
     }
     return 0;
 }
+
+
+void startBoatDetectionThread()
+{
+    int x = piThreadCreate(checkBoatDetection);
+}
+

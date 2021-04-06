@@ -7,7 +7,7 @@ int main()
     setup();
     activateBoatTrafficLight(0);
 
-    int boatDetection = piThreadCreate(checkBoatDetection);
+    startBoatDetectionThread();
 
     sendCommands();
 

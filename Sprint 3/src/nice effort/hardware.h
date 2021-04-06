@@ -28,7 +28,6 @@ using namespace std;
 void setup();
 void pulse(const int pin, const float delay1, const float delay2);
 void changeServoPosition(const int pin, const int position);
-void getCurrentDistance(const int trig_pin, const int echo_pin);
 void activateLeds();
 void send_bytes(vector<bool> bytes);
 void activateBoatTrafficLight(bool color);

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "PracticalSocket.h"
 #include <iostream>
 #include <thread>

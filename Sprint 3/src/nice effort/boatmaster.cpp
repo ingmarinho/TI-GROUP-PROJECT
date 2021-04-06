@@ -1,5 +1,4 @@
 #include "boatmaster.h"
-#include "bridge.h"
 
 void sendCommand(publisher &p, string message)
 {
@@ -11,9 +10,9 @@ void bridgeOpenRequest()
     string answer;
     getline(cin, answer);
     if (answer == "ACCEPT")
-        startBridgeSequenced();
+        startBridgeSequence();
     else
-        sendCommand("Opening bridge currently unavailable, please try again later");
+        sendCommand(p, "Opening bridge currently unavailable, please try again later");
 }
 
 void commandHandler(string message)
@@ -27,7 +26,7 @@ void commandHandler(string message)
         cout << "Unknown command: " << message << endl;
 }
 
-int sendCommands()
+void sendCommands()
 {
     while (true)
     {
