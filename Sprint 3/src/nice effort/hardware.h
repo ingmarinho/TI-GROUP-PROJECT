@@ -23,8 +23,6 @@
 
 #define BEEP 28
 
-using namespace std;
-
 void setup();
 void pulse(const int pin, const float delay1, const float delay2);
 void changeServoPosition(const int pin, const int position);

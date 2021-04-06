@@ -1,16 +1,20 @@
 #include "boatmaster.h"
+#include "bridge.h"
 
-void sendCommand(publisher &p, string message)
-{
-    p.send(message);
-}
+using namespace std;
+
+subscription s("boat", commandHandler);
+string message;
 
 void bridgeOpenRequest()
 {
     string answer;
     getline(cin, answer);
     if (answer == "ACCEPT")
+    {
+        cout << "OPENING BRIDGE!" << endl;
         startBridgeSequence();
+    }
     else
         sendCommand(p, "Opening bridge currently unavailable, please try again later");
 }
@@ -26,13 +30,13 @@ void commandHandler(string message)
         cout << "Unknown command: " << message << endl;
 }
 
-void sendCommands()
-{
-    while (true)
-    {
-        cout << "$ ";
-        getline(cin, message);
-        if (message == "STOP")
-            break;
-    }
-}
+// void sendCommands()
+// {
+//     while (true)
+//     {
+//         cout << "$ ";
+//         getline(cin, message);
+//         if (message == "STOP")
+//             break;
+//     }
+// }

@@ -140,6 +140,7 @@ void startBridgeSequence()
 
     sequenceStart = 1;
 }
+
 PI_THREAD(checkBoatDetection)
 {
     while (true)

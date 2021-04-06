@@ -9,6 +9,6 @@ int main()
 
     startBoatDetectionThread();
 
-    sendCommands();
+    // sendCommands();
 
 }

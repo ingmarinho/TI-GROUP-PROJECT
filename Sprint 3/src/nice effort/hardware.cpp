@@ -1,5 +1,6 @@
 #include "hardware.h"
 
+using namespace std;
 
 void setup()
 {
