@@ -27,6 +27,8 @@ void commandHandler(string message)
         cout << "Unknown command: " << message << endl;
 }
 
+subscription s("boat", commandHandler);
+
 // void sendCommands()
 // {
 //     while (true)
@@ -38,12 +40,12 @@ void commandHandler(string message)
 //     }
 // }
 
-void receiveCommands()
-{
-	subscription s("boat", commandHandler);
-    string message;
+// void receiveCommands()
+// {
+// 	subscription s("boat", commandHandler);
+//     string message;
 
-	cout << "waiting for messages" << endl;
-	cout << "type \'s\' to stop"  << endl;
-	cin.get();
-}
+// 	cout << "waiting for messages" << endl;
+// 	cout << "type \'s\' to stop"  << endl;
+// 	cin.get();
+// }

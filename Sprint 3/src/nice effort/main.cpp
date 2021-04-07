@@ -7,8 +7,9 @@ int main()
     setup();
     activateBoatTrafficLight(0);
 
-    startBoatDetectionThread();
+    checkBoatDetection();
+    // startBoatDetectionThread();
 
-    receiveCommands();
+    // receiveCommands();
     // sendCommands();
 }

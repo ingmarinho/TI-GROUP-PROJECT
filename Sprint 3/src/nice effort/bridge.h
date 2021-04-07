@@ -10,4 +10,5 @@ int closeBarriers();
 int openBarriers();
 void playBarrierSound();
 void startBridgeSequence();
-void startBoatDetectionThread();
+void checkBoatDetection();
+// void startBoatDetectionThread();

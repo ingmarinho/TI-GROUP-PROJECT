@@ -162,3 +162,14 @@ void startBoatDetectionThread()
     int x = piThreadCreate(checkBoatDetection);
 }
 
+void checkBoatDetection()
+{
+    while (true)
+    {
+        int distanceFront = getCurrentDistance(TRIG1, ECHO1);
+        int distanceBack = getCurrentDistance(TRIG2, ECHO2);
+
+        if (distanceFront < 10 || distanceBack < 10)
+            startBridgeSequence();
+    }
+}
