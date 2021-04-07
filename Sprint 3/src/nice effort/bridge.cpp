@@ -112,6 +112,8 @@ void startBridgeSequence()
 
     openBarriers();
     cout << "Barriers are closing!" << endl;
+    
+    delay (5000);
 
     openBridge();
     cout << "Bridge has been opened!" << endl;

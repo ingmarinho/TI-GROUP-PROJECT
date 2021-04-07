@@ -20,7 +20,7 @@
 #define CLCK 10     // GPIO 8 | Output led strip (CLCK) (BRIDGE LIGHT)
 #define INFO 6     // GPIO 25 | Output led strip (INFO) (BRIDGE LIGHT)
 
-#define BEEP 28
+#define BEEP 29
 
 void setup();
 void pulse(const int pin, const float delay1, const float delay2);
