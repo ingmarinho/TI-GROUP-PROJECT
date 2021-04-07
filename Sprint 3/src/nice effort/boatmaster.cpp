@@ -5,7 +5,7 @@ using namespace std;
 
 void bridgeOpenRequest()
 {
-    string answer;
+    string answer = "";
     getline(cin, answer);
     if (answer == "ACCEPT")
     {
