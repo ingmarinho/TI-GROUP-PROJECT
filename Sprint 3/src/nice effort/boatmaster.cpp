@@ -37,6 +37,7 @@ void commandHandler(string message)
 //             break;
 //     }
 // }
+
 void receiveCommands()
 {
 	subscription s("boat", commandHandler);
