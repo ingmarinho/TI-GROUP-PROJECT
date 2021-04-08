@@ -3,90 +3,93 @@
 
 using namespace std;
 
-PI_THREAD(closeRightBarrier)
+PI_THREAD(closeRightBarrier) // code om de rechter slagboom omhoog te zetten.
 {
-    for (unsigned int i = 100; i > 50; i -= 2)
+    for (unsigned int i = 100; i > 50; i -= 2) // er voor zorgen dat de slagboom langzaam beweegt.
     {
         changeServoPosition(SERV2, i);
         delay(200);
     }
     return 0;
 }
-void closeLeftBarrier()
+
+void closeLeftBarrier() // code om de linker slagboom omhoog te zetten.
 {
-    for (unsigned int i = 50; i < 100; i += 2)
+    for (unsigned int i = 50; i < 100; i += 2) // er voor zorgen dat de slagboom langzaam beweegt.
     {
         changeServoPosition(SERV3, i);
         delay(200);
     }
 }
-PI_THREAD(openRightBarrier)
+
+PI_THREAD(openRightBarrier) // code om de rechter slagboom horizontaal te zetten.
 {
-    for (unsigned int i = 50; i < 100; i += 2)
+    for (unsigned int i = 50; i < 100; i += 2) // er voor zorgen dat de slagboom langzaam beweegt.
     {
         changeServoPosition(SERV2, i);
         delay(200);
     }
     return 0;
 }
-void openLeftBarrier()
+
+void openLeftBarrier() // code om de rechter slagboom horizontaal te zetten.
 {
-    for (unsigned int i = 100; i > 50; i -= 2)
+    for (unsigned int i = 100; i > 50; i -= 2) // er voor zorgen dat de slagboom langzaam beweegt.
     {
         changeServoPosition(SERV3, i);
         delay(200);
     }
 }
 
-PI_THREAD(activateTrafficLights)
+PI_THREAD(activateTrafficLights) // code voor de lampen voor de weg aan te sturen.
 {
-    while (sequenceStart == 0)
+    while (sequenceStart == 0) // ga door tot dat je uit word gezet.
     {
-        activateLeds();
+        activateLeds(); // laat de lamen uit en aan gaan.
         delay(200);
     }
     return 0;
 }
 
-void openBridge()
+void openBridge() // code om de brug te openen.
 {
-    for (unsigned int i = 0; i < 50; i += 2)
+    for (unsigned int i = 0; i < 50; i += 2) // er voor zorgen dat de brug niet te snel open gaat.
     {
         changeServoPosition(SERV1, i);
         delay(200);
     }
 }
 
-void closeBridge()
+void closeBridge() // code om de brug te sluiten.
 {
-    for (unsigned int i = 50; i > 0; i -= 2)
+    for (unsigned int i = 50; i > 0; i -= 2) // er voor zorgen dat de brug niet te snel dicht gaat.
     {
         changeServoPosition(SERV1, i);
         delay(200);
     }
 }
 
-int closeBarriers()
+int closeBarriers() // stuur bijde slagbomen naar een verticale positie.
 {
-    int rightBarrier = piThreadCreate(closeRightBarrier);
-    closeLeftBarrier();
+    int rightBarrier = piThreadCreate(closeRightBarrier); // zet de rechter slagboom in zijn eigen thread.
+    closeLeftBarrier(); // stuur de linker aan.
 
-    if (rightBarrier == 0)
+    if (rightBarrier == 0) // kijk of de rechter barriere verticaal is.
         return 0;
     return -1;
 }
 
-int openBarriers()
+int openBarriers() // stuur bijde slagbomen naar een horizontale positie.
 {
-    int rightBarrier = piThreadCreate(openRightBarrier);
-    openLeftBarrier();
+    int rightBarrier = piThreadCreate(openRightBarrier); // zet de rechter slagboom in zijn eigen thread.
+    openLeftBarrier(); // stuur de linker aan.
 
-    if (rightBarrier == 0)
+    if (rightBarrier == 0)  // kijk of de rechter barriere horizontaal is.
         return 0;
     return -1;
 }
 
-void playBarrierSound()
+void playBarrierSound() // 
 {
     for (unsigned int i = 0; i < 5; i++)
     {
