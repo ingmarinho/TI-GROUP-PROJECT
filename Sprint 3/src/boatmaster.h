@@ -8,5 +8,3 @@
 void bridgeOpenRequest();
 void commandHandler(string message);
 void receiveCommands();
-
-// void sendCommands();

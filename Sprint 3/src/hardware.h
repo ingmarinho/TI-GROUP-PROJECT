@@ -20,7 +20,7 @@
 #define CLCK 10     // GPIO 8  | Output led strip (CLCK) (BRIDGE LIGHT)
 #define INFO 6      // GPIO 25 | Output led strip (INFO) (BRIDGE LIGHT)
 
-#define BEEP 29     // GPIO 21 | Output piepertje (GELUID)
+#define BEEP 29     // GPIO 21 | Output piepertje (BEEP) (GELUID)
 
 void setup();
 void pulse(const int pin, const float delay1, const float delay2);
@@ -28,5 +28,4 @@ void changeServoPosition(const int pin, const int position);
 void activateLeds();
 void send_bytes(std::vector<bool> bytes);
 void activateBoatTrafficLight(bool color);
-void barrierSound();
 int getCurrentDistance(const int trig_pin, const int echo_pin);
