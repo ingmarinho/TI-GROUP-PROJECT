@@ -11,17 +11,17 @@ void setup()
     pinMode(TRIG2, OUTPUT); // GPIO 18 | Output distance sensor (TRIG2) (BOAT DETECTION BACK)
     pinMode(ECHO2, INPUT);  // GPIO 23 | Input distance sensor (ECHO2) (BOAT DETECTION BACK)
 
-    pinMode(LED1, OUTPUT);
-    pinMode(LED2, OUTPUT);
+    pinMode(LED1, OUTPUT);  // GPIO 7  | Output waarschuwings LED links  (LED1)
+    pinMode(LED2, OUTPUT);  // GPIO 16 | Output waarschuwings LED rechts (LED2)
 
-    pinMode(SERV1, OUTPUT); // GPIO 25 | Output servo (SERV1) (BRIDGE)
-    pinMode(SERV2, OUTPUT); // GPIO 26 | Output servo (SERV2) (BARRIER 1)
-    pinMode(SERV3, OUTPUT); // GPIO 12 | Output servo (SERV3) (SERV3) (BARRIER 2)
+    pinMode(SERV1, OUTPUT); // GPIO 24 | Output servo (SERV1) (BRIDGE)
+    pinMode(SERV2, OUTPUT); // GPIO 1  | Output servo (SERV2) (BARRIER 1)
+    pinMode(SERV3, OUTPUT); // GPIO 12 | Output servo (SERV3) (BARRIER 2)
 
-    pinMode(CLCK, OUTPUT); // GPIO 1  | Output led strip (CLCK) (BRIDGE LIGHTS)
-    pinMode(INFO, OUTPUT); // GPIO 12 | Output led strip (INFO) (BRIDGE LIGHTS)
+    pinMode(CLCK, OUTPUT); // GPIO 8  | Output led strip (CLCK) (BRIDGE LIGHT)
+    pinMode(INFO, OUTPUT); // GPIO 25 | Output led strip (INFO) (BRIDGE LIGHT)
 
-    pinMode(BEEP, OUTPUT);
+    pinMode(BEEP, OUTPUT); // GPIO 21 | Output piepertje (GELUID)
 }
 
 void pulse(const int &pin, const unsigned int &delay1, const unsigned int &wait_time) // Code om voor een bepaalde tijd een led aan te doen.
