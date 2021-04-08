@@ -3,9 +3,9 @@
 
 using namespace std;
 
-PI_THREAD(closeRightBarrier) // code om de rechter slagboom omhoog te zetten.
+PI_THREAD(closeRightBarrier) // Code om de rechter slagboomd dicht te zetten.
 {
-    for (unsigned int i = 100; i > 50; i -= 2) // er voor zorgen dat de slagboom langzaam beweegt.
+    for (unsigned int i = 100; i > 50; i -= 2) // Zorgt voor de stepsize van de servo voor een 'vloeiende beweging'
     {
         changeServoPosition(SERV2, i);
         delay(200);
@@ -13,18 +13,18 @@ PI_THREAD(closeRightBarrier) // code om de rechter slagboom omhoog te zetten.
     return 0;
 }
 
-void closeLeftBarrier() // code om de linker slagboom omhoog te zetten.
+void closeLeftBarrier() // Code om de linker slagboom dicht te zetten.
 {
-    for (unsigned int i = 50; i < 100; i += 2) // er voor zorgen dat de slagboom langzaam beweegt.
+    for (unsigned int i = 50; i < 100; i += 2) //  Zorgt voor de stepsize van de servo voor een 'vloeiende beweging'
     {
         changeServoPosition(SERV3, i);
         delay(200);
     }
 }
 
-PI_THREAD(openRightBarrier) // code om de rechter slagboom horizontaal te zetten.
+PI_THREAD(openRightBarrier) // code om de rechter slagboom open te zetten.
 {
-    for (unsigned int i = 50; i < 100; i += 2) // er voor zorgen dat de slagboom langzaam beweegt.
+    for (unsigned int i = 50; i < 100; i += 2) //  Zorgt voor de stepsize van de servo voor een 'vloeiende beweging'
     {
         changeServoPosition(SERV2, i);
         delay(200);
@@ -32,16 +32,16 @@ PI_THREAD(openRightBarrier) // code om de rechter slagboom horizontaal te zetten
     return 0;
 }
 
-void openLeftBarrier() // code om de rechter slagboom horizontaal te zetten.
+void openLeftBarrier() // Code om de rechter slagboom open te zetten.
 {
-    for (unsigned int i = 100; i > 50; i -= 2) // er voor zorgen dat de slagboom langzaam beweegt.
+    for (unsigned int i = 100; i > 50; i -= 2) // Zorgt voor de stepsize van de servo voor een 'vloeiende beweging'
     {
         changeServoPosition(SERV3, i);
         delay(200);
     }
 }
 
-PI_THREAD(activateTrafficLights) // code voor de lampen voor de weg aan te sturen.
+PI_THREAD(activateTrafficLights) // Thread voor de gevaren lichten op de brug.
 {
     while (sequenceStart == 0) // ga door tot dat je uit word gezet.
     {
@@ -51,45 +51,45 @@ PI_THREAD(activateTrafficLights) // code voor de lampen voor de weg aan te sture
     return 0;
 }
 
-void openBridge() // code om de brug te openen.
+void openBridge() // Code om de brug te openen.
 {
-    for (unsigned int i = 0; i < 50; i += 2) // er voor zorgen dat de brug niet te snel open gaat.
+    for (unsigned int i = 0; i < 50; i += 2) // Zorgt voor de stepsize van de servo voor een 'vloeiende beweging'
     {
         changeServoPosition(SERV1, i);
         delay(200);
     }
 }
 
-void closeBridge() // code om de brug te sluiten.
+void closeBridge() // Code om de brug te sluiten.
 {
-    for (unsigned int i = 50; i > 0; i -= 2) // er voor zorgen dat de brug niet te snel dicht gaat.
+    for (unsigned int i = 50; i > 0; i -= 2) //  Zorgt voor de stepsize van de servo voor een 'vloeiende beweging'
     {
         changeServoPosition(SERV1, i);
         delay(200);
     }
 }
 
-int closeBarriers() // stuur bijde slagbomen naar een verticale positie.
+int closeBarriers() // Code om beide slagebomen dicht te laten gaan.
 {
-    int rightBarrier = piThreadCreate(closeRightBarrier); // zet de rechter slagboom in zijn eigen thread.
+    int rightBarrier = piThreadCreate(closeRightBarrier); // Zet de rechter slagboom in zijn eigen thread.
     closeLeftBarrier(); // stuur de linker aan.
 
-    if (rightBarrier == 0) // kijk of de rechter barriere verticaal is.
+    if (rightBarrier == 0) // Kijk of de slagboom in zijn beginpositie staat.
         return 0;
     return -1;
 }
 
-int openBarriers() // stuur bijde slagbomen naar een horizontale positie.
+int openBarriers() // Code om beide slagbomen te openen.
 {
-    int rightBarrier = piThreadCreate(openRightBarrier); // zet de rechter slagboom in zijn eigen thread.
-    openLeftBarrier(); // stuur de linker aan.
+    int rightBarrier = piThreadCreate(openRightBarrier); // Zet de rechter slagboom in zijn eigen thread.
+    openLeftBarrier(); // Stuurt de linker slagboom aan.
 
-    if (rightBarrier == 0)  // kijk of de rechter barriere horizontaal is.
+    if (rightBarrier == 0)  // Kijk of de de slagboom in zijn beginpostitie staat.
         return 0;
     return -1;
 }
 
-void playBarrierSound() // laat de bellen 5 keer klinken.
+void playBarrierSound() // Code om het piepertje geluid uit te laten voeren bij openen en sluiten van slagbomen. 
 {
     for (unsigned int i = 0; i < 5; i++)
     {
@@ -98,83 +98,83 @@ void playBarrierSound() // laat de bellen 5 keer klinken.
     }
 }
 
-void startBridgeSequence() // laat de brug open en dight gaan.
+void startBridgeSequence() // Code om de functionaliteiten van de brug uit te voeren.
 {
-    sequenceStart = 0; // variable die laat zien aan de weg lampen dat ze nog bezig moeten zijn.
+    sequenceStart = 0;
     
-    int distanceFront = 0; // intitaleseer deze variables
+    int distanceFront = 0;
     int distanceBack = 0;
 
-    int trafficLights = piThreadCreate(activateTrafficLights); // maak een thread aan voor de waarschuwings lampen van de auto's
+    int trafficLights = piThreadCreate(activateTrafficLights);
 
-    delay(3000); // wacht even zodat mensen kunnen stoppen.
+    delay(3000);
 
-    playBarrierSound(); // laat het geluid 5 maal klinken.
+    playBarrierSound();
 
-    delay(1000); // wacht even tot het goede moment.
+    delay(1000);
 
-    openBarriers(); // maak de slagbomen horizontaal.
-    cout << "Barriers are closing!" << endl; // wij gaan niet onze fout erkennen....
+    openBarriers();
+    cout << "Barriers are closing!" << endl;
     
-    delay (5000); // wacht even zodat ook le laaste gekken weg zijn.
+    delay (5000);
 
-    openBridge(); // open de brug
+    openBridge();
     cout << "Bridge has been opened!" << endl;
 
-    activateBoatTrafficLight(1); // maak de ledstrip (voor de boten) groen.
+    activateBoatTrafficLight(1);
 
-    while (distanceFront < 10 || distanceBack < 10) // blijft open tot dat de boten buiten de 10 cm komen.
+    while (distanceFront < 10 || distanceBack < 10)
     {
         distanceFront = getCurrentDistance(TRIG1, ECHO1);
         distanceBack = getCurrentDistance(TRIG2, ECHO2);
     }
 
-    delay(5000); // geef de boten even de tijd om langs de brug te gaan.
+    delay(5000);
 
-    activateBoatTrafficLight(0); // maak de ledstrip (voor de boten) rood.
+    activateBoatTrafficLight(0);
 
-    closeBridge(); // sluit de brug.
+    closeBridge();
     cout << "Bridge has been closed!" << endl;
 
-    delay(1000); // wacht tot dat de brug weer goed stil staat.
+    delay(1000);
 
-    playBarrierSound(); // laat het geluid weer 5 keer klinken.
+    playBarrierSound();
 
-    closeBarriers(); // zet de slagbomen verticaal.
+    closeBarriers();
     cout << "Barriers are opening!" << endl;
 
-    delay(3000); // wacht even voor de singalen voor de auto's uit gaan.
+    delay(3000);
 
-    sequenceStart = 1; // zet de kniper lichten voor de auto's uit.
+    sequenceStart = 1;
 }
 
-PI_THREAD(checkBoatDetection) // thread versie van de boot detectie.
+PI_THREAD(checkBoatDetection) // Thread om beide afstandssensoren gelijkwaardig input te laten meten.
 {
-    while (true) // bijft dit doen, voor altijd
+    while (true)
     {
-        int distanceFront = getCurrentDistance(TRIG1, ECHO1); // krijg de afstand van de 2 afstand sensors.
+        int distanceFront = getCurrentDistance(TRIG1, ECHO1);
         int distanceBack = getCurrentDistance(TRIG2, ECHO2);
 
-        if (distanceFront < 10 || distanceBack < 10) // als de afstand van 1 van de 2 binnen 10 valt laat dan de brug open en dight gaan.
+        if (distanceFront < 10 || distanceBack < 10)
             startBridgeSequence();
     }
     return 0;
 }
 
 
-void startBoatDetectionThread() // activeer de thread versie van de boot detectie.
+void startBoatDetectionThread() 
 {
     int x = piThreadCreate(checkBoatDetection);
 }
 
-void checkBoatDetection() // de linieare versie van de boot detectie.
+void checkBoatDetection() 
 {
-    while (true) // bijft dit doen, voor altijd
+    while (true)
     {
-        int distanceFront = getCurrentDistance(TRIG1, ECHO1); // krijg de afstand van de 2 afstand sensors.
+        int distanceFront = getCurrentDistance(TRIG1, ECHO1);
         int distanceBack = getCurrentDistance(TRIG2, ECHO2);
 
-        if (distanceFront < 10 || distanceBack < 10) // als de afstand van 1 van de 2 binnen 10 valt laat dan de brug open en dight gaan.
+        if (distanceFront < 10 || distanceBack < 10)
             startBridgeSequence();
     }
 }
