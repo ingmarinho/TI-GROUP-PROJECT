@@ -93,7 +93,7 @@ void playBarrierSound()                                                 // Code 
 {
     for (unsigned int i = 0; i < 5; i++)
     {
-        pulse(BEEP, 200, 0);
+        pulse(BEEP, 200 * 1000, 0);
         delay(200);
     }
 }

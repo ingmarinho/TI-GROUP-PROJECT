@@ -23,7 +23,7 @@
 #define BEEP 29     // GPIO 21 | Output piepertje (BEEP) (GELUID)
 
 void setup();
-void pulse(const int pin, const float delay1, const float delay2);
+void pulse(const int &pin, const unsigned int &delay1, const unsigned int &wait_time) ;
 void changeServoPosition(const int pin, const int position);
 void activateLeds();
 void send_bytes(std::vector<bool> bytes);
