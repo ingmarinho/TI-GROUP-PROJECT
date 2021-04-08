@@ -1,3 +1,5 @@
+// DEZE CODE WAS BEDOELD OM VOOR STATISTIEKEN VAN DE BRUG TE GEBRUIKEN IN DE GUI DIE WE NIET HEBBEN KUNNEN REALISEREN.
+
 int counter_open_totaal = 200;
 int pointerday = 0;
 int counter_week_totaal = 42;
