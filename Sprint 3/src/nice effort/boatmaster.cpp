@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void bridgeOpenRequest()
+void bridgeOpenRequest() // Code om inkomende PubSub bericht te controleren en de brug sequence te starten.
 {
     string answer = "";
     getline(cin, answer);
@@ -16,7 +16,7 @@ void bridgeOpenRequest()
         cout << "NEE" << endl;
 }
 
-void commandHandler(string message)
+void commandHandler(string message) // Code om te checken of het inkomende bericht vanuit het schip een valide aanvraag is. 
 {
     if (message == "OPEN")
     {
@@ -28,6 +28,8 @@ void commandHandler(string message)
 }
 
 subscription s("boat", commandHandler);
+
+
 
 // void sendCommands()
 // {
