@@ -89,7 +89,7 @@ int openBarriers() // stuur bijde slagbomen naar een horizontale positie.
     return -1;
 }
 
-void playBarrierSound() // 
+void playBarrierSound() // laat de bellen 5 keer klinken.
 {
     for (unsigned int i = 0; i < 5; i++)
     {
@@ -98,83 +98,83 @@ void playBarrierSound() //
     }
 }
 
-void startBridgeSequence()
+void startBridgeSequence() // laat de brug open en dight gaan.
 {
-    sequenceStart = 0;
+    sequenceStart = 0; // variable die laat zien aan de weg lampen dat ze nog bezig moeten zijn.
     
-    int distanceFront = 0;
+    int distanceFront = 0; // intitaleseer deze variables
     int distanceBack = 0;
 
-    int trafficLights = piThreadCreate(activateTrafficLights);
+    int trafficLights = piThreadCreate(activateTrafficLights); // maak een thread aan voor de waarschuwings lampen van de auto's
 
-    delay(3000);
+    delay(3000); // wacht even zodat mensen kunnen stoppen.
 
-    playBarrierSound();
+    playBarrierSound(); // laat het geluid 5 maal klinken.
 
-    delay(1000);
+    delay(1000); // wacht even tot het goede moment.
 
-    openBarriers();
-    cout << "Barriers are closing!" << endl;
+    openBarriers(); // maak de slagbomen horizontaal.
+    cout << "Barriers are closing!" << endl; // wij gaan niet onze fout erkennen....
     
-    delay (5000);
+    delay (5000); // wacht even zodat ook le laaste gekken weg zijn.
 
-    openBridge();
+    openBridge(); // open de brug
     cout << "Bridge has been opened!" << endl;
 
-    activateBoatTrafficLight(1);
+    activateBoatTrafficLight(1); // maak de ledstrip (voor de boten) groen.
 
-    while (distanceFront < 10 || distanceBack < 10)
+    while (distanceFront < 10 || distanceBack < 10) // blijft open tot dat de boten buiten de 10 cm komen.
     {
         distanceFront = getCurrentDistance(TRIG1, ECHO1);
         distanceBack = getCurrentDistance(TRIG2, ECHO2);
     }
 
-    delay(5000);
+    delay(5000); // geef de boten even de tijd om langs de brug te gaan.
 
-    activateBoatTrafficLight(0);
+    activateBoatTrafficLight(0); // maak de ledstrip (voor de boten) rood.
 
-    closeBridge();
+    closeBridge(); // sluit de brug.
     cout << "Bridge has been closed!" << endl;
 
-    delay(1000);
+    delay(1000); // wacht tot dat de brug weer goed stil staat.
 
-    playBarrierSound();
+    playBarrierSound(); // laat het geluid weer 5 keer klinken.
 
-    closeBarriers();
+    closeBarriers(); // zet de slagbomen verticaal.
     cout << "Barriers are opening!" << endl;
 
-    delay(3000);
+    delay(3000); // wacht even voor de singalen voor de auto's uit gaan.
 
-    sequenceStart = 1;
+    sequenceStart = 1; // zet de kniper lichten voor de auto's uit.
 }
 
-PI_THREAD(checkBoatDetection)
+PI_THREAD(checkBoatDetection) // thread versie van de boot detectie.
 {
-    while (true)
+    while (true) // bijft dit doen, voor altijd
     {
-        int distanceFront = getCurrentDistance(TRIG1, ECHO1);
+        int distanceFront = getCurrentDistance(TRIG1, ECHO1); // krijg de afstand van de 2 afstand sensors.
         int distanceBack = getCurrentDistance(TRIG2, ECHO2);
 
-        if (distanceFront < 10 || distanceBack < 10)
+        if (distanceFront < 10 || distanceBack < 10) // als de afstand van 1 van de 2 binnen 10 valt laat dan de brug open en dight gaan.
             startBridgeSequence();
     }
     return 0;
 }
 
 
-void startBoatDetectionThread()
+void startBoatDetectionThread() // activeer de thread versie van de boot detectie.
 {
     int x = piThreadCreate(checkBoatDetection);
 }
 
-void checkBoatDetection()
+void checkBoatDetection() // de linieare versie van de boot detectie.
 {
-    while (true)
+    while (true) // bijft dit doen, voor altijd
     {
-        int distanceFront = getCurrentDistance(TRIG1, ECHO1);
+        int distanceFront = getCurrentDistance(TRIG1, ECHO1); // krijg de afstand van de 2 afstand sensors.
         int distanceBack = getCurrentDistance(TRIG2, ECHO2);
 
-        if (distanceFront < 10 || distanceBack < 10)
+        if (distanceFront < 10 || distanceBack < 10) // als de afstand van 1 van de 2 binnen 10 valt laat dan de brug open en dight gaan.
             startBridgeSequence();
     }
 }
