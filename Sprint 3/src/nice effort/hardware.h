@@ -17,10 +17,10 @@
 #define SERV2 31    // GPIO 26 | Output servo (SERV2) (BARRIER 1)
 #define SERV3 26    // GPIO 12 | Output servo (SERV3) (BARRIER 2)
 
-#define CLCK 10     // GPIO 8 | Output led strip (CLCK) (BRIDGE LIGHT)
-#define INFO 6     // GPIO 25 | Output led strip (INFO) (BRIDGE LIGHT)
+#define CLCK 10     // GPIO 8  | Output led strip (CLCK) (BRIDGE LIGHT)
+#define INFO 6      // GPIO 25 | Output led strip (INFO) (BRIDGE LIGHT)
 
-#define BEEP 29
+#define BEEP 29     // GPIO 21 | Output piepertje (GELUID)
 
 void setup();
 void pulse(const int pin, const float delay1, const float delay2);
